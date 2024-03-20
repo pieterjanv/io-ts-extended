@@ -1,0 +1,34 @@
+{
+  "name": "io-ts-extended",
+  "version": "0.0.1",
+  "description": "Type comparison for io-ts with some extras.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "test": "cd test && tsc && node out/test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pieterjanv/io-ts-extended.git"
+  },
+  "keywords": [
+    "types",
+    "type comparison",
+    "io-ts",
+    "reflection"
+  ],
+  "author": "P.J. Visser",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pieterjanv/io-ts-extended/issues"
+  },
+  "homepage": "https://github.com/pieterjanv/io-ts-extended#readme",
+  "dependencies": {
+    "fp-ts": "^2.16.4",
+    "io-ts": "^2.2.21"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}
