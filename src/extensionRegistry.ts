@@ -67,7 +67,11 @@ export const extensionRegistry = new class ExtensionRegistry {
 	register<S extends TypeCtor, T extends TypeCtor>(
 		source: S,
 		target: T,
-		test: (source: InstanceType<S>, target: InstanceType<T>, isExtendedBy: IsExtendedBy) => Ternary,
+		test: (
+			source: InstanceType<S>,
+			target: InstanceType<T>,
+			isExtendedBy: IsExtendedBy
+		) => Ternary,
 		intersectionHandler: InstanceType<T> extends t.DictionaryType<t.Any, t.Any>
 			? DictionaryIntersectionHandler<S, T>
 			: InstanceType<T> extends t.InterfaceType<any>
