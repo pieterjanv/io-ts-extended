@@ -1,8 +1,8 @@
 import { extendProtype } from "../misc.js";
 import * as t from 'io-ts';
-import { unionSourceDefaultHandler } from "../index.js";
 import { IsExtendedBy, TypeCtor, extensionRegistry } from "../extensionRegistry.js";
 import { Ternary, ternaryEvery } from "../ternary.js";
+import { unionSourceDefaultHandler } from "./union.js";
 
 extendProtype(t.DictionaryType, {
 	render() { return `Record<${(this.domain as any).render()}, ${(this.codomain as any).render()}>`; },

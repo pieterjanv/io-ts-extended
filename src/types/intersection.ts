@@ -2,7 +2,7 @@ import * as t from 'io-ts';
 import { extendProtype } from '../misc.js';
 import { PromiseType } from './promise.js';
 import { IsExtendedBy, extensionRegistry } from '../extensionRegistry.js';
-import { ternaryEvery, ternarySome } from '../ternary.js';
+import { Ternary, ternaryEvery, ternarySome } from '../ternary.js';
 
 extendProtype(t.IntersectionType, {
 	render(isComposed) {
@@ -12,11 +12,11 @@ extendProtype(t.IntersectionType, {
 	}
 });
 
-export function intersectionSourceDefaultHandler (
+export function intersectionSourceDefaultHandler(
 	source: t.IntersectionType<t.Any[]>,
 	target: t.Type<unknown>,
 	isExtendedBy: IsExtendedBy,
-) {
+): Ternary {
 	return ternarySome(
 		source.types as t.Type<unknown>[],
 		(type) => isExtendedBy(target, type),
@@ -27,7 +27,7 @@ export function intersectionTargetDefaultHandler (
 	source: t.Type<unknown>,
 	target: t.IntersectionType<t.Any[]>,
 	isExtendedBy: IsExtendedBy,
-) {
+): Ternary {
 	return ternaryEvery(
 		target.types as t.Type<unknown>[],
 		(type) => isExtendedBy(type, source),
@@ -226,5 +226,3 @@ extensionRegistry.register(
 	intersectionTargetDefaultHandler,
 	undefined,
 );
-
-

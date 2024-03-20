@@ -2,6 +2,7 @@
   "name": "io-ts-extended",
   "version": "0.0.1",
   "description": "Type comparison for io-ts with some extras.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "vite",

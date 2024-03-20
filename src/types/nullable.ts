@@ -46,13 +46,13 @@ export const nullSourceDefaultHandler = (
 	source: NullableType<unknown>,
 	target: t.Type<unknown>,
 	isExtendedBy: IsExtendedBy,
-) => isExtendedBy(target, source.type);
+): Ternary => isExtendedBy(target, source.type);
 
 export const nullTargetDefaultHandler = (
 	source: t.Type<unknown>,
 	target: NullableType<unknown>,
 	isExtendedBy: IsExtendedBy,
-) => isExtendedBy(target.type, source);
+): Ternary => isExtendedBy(target.type, source);
 
 extensionRegistry.register(
 	NullableType,
@@ -105,13 +105,6 @@ extensionRegistry.register(
 
 extensionRegistry.register(
 	t.ReadonlyType,
-	NullableType,
-	nullTargetDefaultHandler,
-	undefined,
-);
-
-extensionRegistry.register(
-	t.IntersectionType,
 	NullableType,
 	nullTargetDefaultHandler,
 	undefined,

@@ -1,8 +1,8 @@
 import * as t from 'io-ts';
 import { extendProtype } from '../misc.js';
-import { intersectionSourceDefaultHandler } from './intersection.js';
-import { ternaryEvery, ternarySome } from '../ternary.js';
+import { Ternary, ternaryEvery, ternarySome } from '../ternary.js';
 import { IsExtendedBy, extensionRegistry } from '../extensionRegistry.js';
+import { intersectionSourceDefaultHandler } from './intersection.js';
 
 extendProtype(t.UnionType, {
 	render(isComposed) {

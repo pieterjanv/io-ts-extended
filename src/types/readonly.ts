@@ -33,13 +33,6 @@ extensionRegistry.register(
 );
 
 extensionRegistry.register(
-	t.IntersectionType,
-	t.ReadonlyType,
-	readonlyTargetDefaultHandler,
-	undefined,
-);
-
-extensionRegistry.register(
 	t.UnionType,
 	t.ReadonlyType,
 	readonlyTargetDefaultHandler,

@@ -288,6 +288,7 @@ const tests1: Array<readonly [t.Type<unknown>, t.Type<unknown>, boolean]> = [
 	[t.fn([['a', t.string]] as const, t.boolean), t.record(t.string, t.string), false],
 	[t.type({ a: t.string }), t.record(t.string, t.string), true],
 	[t.type({ a: t.number }), t.record(t.string, t.string), false],
+	[t.type({ a : t.string }), t.record(t.string, t.union([t.string, t.number])), true],
 	[t.intersection([t.type({ a: t.string }), t.type({ b: t.number })]), t.record(t.string, t.string), false],
 	[t.intersection([t.type({ a: t.string }), t.type({ b: t.number })]), t.record(t.string, t.union([t.string, t.number])), true],
 	[t.intersection([t.type({ a: t.string }), t.type({ b: t.number })]), t.record(t.string, t.union([t.intersection([t.string, t.union([t.never, t.unknown])]), t.number])), true],
@@ -429,6 +430,7 @@ const tests1: Array<readonly [t.Type<unknown>, t.Type<unknown>, boolean]> = [
 ];
 
 const tests2: Array<readonly [t.Type<unknown>, t.Type<unknown>, boolean]> = [
+
 	// t.IntersectionType
 	[new t.AnyArrayType, t.intersection([t.array(t.any), t.array(t.unknown)]), true],
 	[new t.AnyArrayType, t.intersection([t.array(t.any), t.array(t.string)]), false],
