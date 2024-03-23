@@ -1,5 +1,5 @@
 import * as t from 'io-ts';
-import { FunctionType, Parameter, stripNullFunctions } from "./function.js";
+import { FunctionType, Parameter, nullFunction, stripNullFunctions } from "./function.js";
 import { isRight } from "fp-ts/lib/Either.js";
 import { unionSourceDefaultHandler, unionTargetDefaultHandler } from "./union.js";
 import { intersectionSourceDefaultHandler, intersectionTargetDefaultHandler } from "./intersection.js";
@@ -13,15 +13,6 @@ export abstract class Implementation {
 	public static clssType: AnyClssType;
 
 	constructor(...args: unknown[]) {}
-
-	public get qualifiedClassName(): string {
-		return Object.getPrototypeOf(this).constructor.qualifiedClassName;
-	}
-
-	public get className(): string {
-		return this.qualifiedClassName
-			.substring('Work.Pjvisser.Act.'.length);
-	}
 
 	public static decode<T extends typeof Implementation>(
 		this: T,
@@ -59,7 +50,7 @@ export class ClssType<
 
 	constructor(
 		name: string,
-		is: t.Is<t.TypeOf<T> & InstanceType<Ctor>>,
+		is: t.Is<t.TypeOf<T>>,
 		validate: t.Validate<unknown, t.TypeOf<T> & InstanceType<Ctor>>,
 		encode: t.Encode<InstanceType<Ctor>, t.TypeOf<T>>,
 		public readonly staticType: S,
@@ -125,6 +116,26 @@ export type AnyClssType = ClssType<
 	typeof Implementation
 >;
 
+const flattenInstance = (
+	instance: Record<string | number, unknown>,
+	result: Record<string | number, unknown> = {},
+): Record<string | number, unknown> => {
+
+	for (const [k, v] of Object.entries(Object.getOwnPropertyDescriptors(instance))) {
+		result[k] ??= typeof v.value === 'function'
+			? nullFunction
+			: v.value;
+	}
+
+	const prototype = Object.getPrototypeOf(instance);
+	if (prototype && prototype !== Object.prototype) {
+		flattenInstance(prototype, result);
+	}
+
+	return result;
+}
+
+
 export const clss: <
 	S extends t.Type<object>,
 	T extends t.Type<object>,
@@ -138,7 +149,10 @@ export const clss: <
 	ctor.qualifiedClassName = name;
 	return new ClssType(
 		name,
-		(u: unknown): u is InstanceType<typeof ctor> => u instanceof ctor,
+		(u: unknown): u is typeof instanceType => (
+			typeof u === 'object' &&
+			instanceType.is(flattenInstance(u as Record<string | number, unknown>))
+		),
 		(i: unknown, ctx: t.Context) => ctor.decode<typeof ctor>(i),
 		(a: InstanceType<typeof ctor>) => ctor.encode(a),
 		staticType,

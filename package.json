@@ -3,10 +3,9 @@
   "version": "0.0.1",
   "description": "Type comparison for io-ts with some extras.",
   "type": "module",
-  "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc --noEmit && vite build && tsc --declaration --emitDeclarationOnly",
     "test": "cd test && tsc && node out/test/index.js"
   },
   "repository": {
@@ -15,6 +14,7 @@
   },
   "keywords": [
     "types",
+    "extends",
     "type comparison",
     "io-ts",
     "reflection"
@@ -31,5 +31,7 @@
   },
   "devDependencies": {
     "vite": "^5.2.0"
-  }
+  },
+  "main": "dist/index.js",
+  "files": ["dist"]
 }

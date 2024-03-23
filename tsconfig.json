@@ -7,8 +7,7 @@
 		"strictFunctionTypes": false,
 		"sourceMap": true,
 		"noImplicitThis": true,
-		"declaration": true,
-		"outDir": "./dist",
+		"outDir": "./dist"
 	},
 	"include": ["./src/index.ts"],
 }

@@ -1,13 +1,15 @@
 export default {
 	build: {
-		manifest: true,
+		lib: {
+			entry: '/src/index.ts',
+			name: 'IoTsExtended',
+			fileName: 'index',
+		},
 		rollupOptions: {
-			input: '/src/index.ts',
 			external: [
 				'io-ts',
 				'fp-ts',
 			],
 		},
 	},
-}
-  
+};
