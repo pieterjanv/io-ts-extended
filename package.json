@@ -1,6 +1,6 @@
 {
   "name": "io-ts-extended",
-  "version": "1.0.1-alpha.1",
+  "version": "1.0.1-alpha.2",
   "description": "Testing if types extend one another for io-ts with some extras.",
   "type": "module",
   "scripts": {
