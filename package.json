@@ -1,6 +1,6 @@
 {
   "name": "io-ts-extended",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Type comparison for io-ts with some extras.",
   "type": "module",
   "scripts": {

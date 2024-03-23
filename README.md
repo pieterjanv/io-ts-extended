@@ -212,15 +212,42 @@ the given key.
 ### Extra types
 
 This package also provides a few extra types that are not present in `io-ts`;
-`t.ClssType`, `t.FunctionType`, `t.NullableType` and `t.PromiseType`.
+`t.FunctionType`, `t.ClssType`, `t.NullableType` and `t.PromiseType`. They come
+with their some quirks.
+
+
+#### `t.FunctionType`
+
+`t.FunctionType` can be used to specify functions with a specific signature, allowing one to define parameter names and types, as well as the return type. As
+such it carries more information than `io-ts`'s' native version.
+
+It doesn't make sense to me to serialize functions. Therefore, using the
+default instantiator `t.fn()`, encoding returns a special
+null function, and decoding will return an optional implementation or the null
+function. There is also a helper function `t.stripNullFunctions()` that can be
+used to recursively remove all null functions from an object.
+
+Example:
+
+```typescript
+const myFn = t.fn(
+	[
+		['param1', t.string],
+		['param2', t.number],
+	] as const,
+	t.boolean
+);
+```
 
 
 #### `t.ClssType`
 
 `t.ClssType` (instantiable with `t.clss()`) allows tying a static and instance
-interface to an implementation, in order to build a type whose type and
+interface to a `t.Implementation`, in order to build a type whose type and
 implementation can be easily extended. To extend a `t.ClssType`, you can use
 the `t.extendClss()` helper.
+
+Methods are removed during encoding, and reinstated during decoding.
 
 Example:
 
@@ -241,30 +268,6 @@ const MyClss = t.clss(
 		instanceProp: boolean = false;
 		instanceMethod(a: number): boolean { return true; };
 	},
-);
-```
-
-
-#### `t.FuncionType`
-
-`t.FunctionType` can be used to specify functions with a specific signature, allowing one to define parameter names and types, as well as the return type. As
-such it carries more information than `io-ts`'s' native version.
-
-It doesn't make sense to me to serialize functions. Therefore, using the
-default instantiator `t.fn()`, encoding returns a special
-null function, and decoding will return an optional implementation or the null
-function. There is also a helper function `t.stripNullFunctions()` that can be
-used to recursively remove all null functions from an object.
-
-Example:
-
-```typescript
-const myFn = t.fn(
-	[
-		['param1', t.string],
-		['param2', t.number],
-	] as const,
-	t.boolean
 );
 ```
 
