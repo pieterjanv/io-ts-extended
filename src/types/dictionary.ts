@@ -20,11 +20,11 @@ extensionRegistry.register(
 		source,
 		target,
 		isExtendedBy,
-		dictSourceResult,
-		propsSourceResult,
+		setDictSourceResult,
+		setPropsSourceResult,
 		addIntersectionMember,
 	) => {
-		dictSourceResult(isExtendedBy(target, source));
+		setDictSourceResult(isExtendedBy(target, source));
 	},
 );
 
@@ -40,11 +40,11 @@ extensionRegistry.register(
 		source,
 		target,
 		isExtendedBy,
-		dictSourceResult,
-		propsSourceResult,
+		setDictSourceResult,
+		setPropsSourceResult,
 		addIntersectionMember,
 	) => {
-		dictSourceResult(isExtendedBy(target, source));
+		setDictSourceResult(isExtendedBy(target, source));
 	},
 );
 
@@ -60,8 +60,8 @@ extensionRegistry.register(
 		source,
 		target,
 		isExtendedBy,
-		dictSourceResult,
-		propsSourceResult,
+		setDictSourceResult,
+		setPropsSourceResult,
 		addIntersectionMember,
 	) => {
 		addIntersectionMember(source.type);
@@ -80,8 +80,8 @@ extensionRegistry.register(
 		source,
 		target,
 		isExtendedBy,
-		dictSourceResult,
-		propsSourceResult,
+		setDictSourceResult,
+		setPropsSourceResult,
 		addIntersectionMember,
 	) => {
 		addIntersectionMember(source.type);
@@ -100,8 +100,8 @@ extensionRegistry.register(
 		source,
 		target,
 		isExtendedBy,
-		dictSourceResult,
-		propsSourceResult,
+		setDictSourceResult,
+		setPropsSourceResult,
 		addIntersectionMember,
 	) => {
 		addIntersectionMember(source.type);
@@ -136,11 +136,11 @@ extensionRegistry.register<
 		source,
 		target,
 		isExtendedBy,
-		dictSourceResult,
-		propsSourceResult,
+		setDictSourceResult,
+		setPropsSourceResult,
 		addIntersectionMember,
 	) => {
-		propsSourceResult((codomain, key) => isExtendedBy(codomain, source.props[key]));
+		setPropsSourceResult((codomain, key) => isExtendedBy(codomain, source.props[key]));
 	},
 );
 
@@ -155,11 +155,11 @@ extensionRegistry.register<
 		source,
 		target,
 		isExtendedBy,
-		dictSourceResult,
-		propsSourceResult,
+		setDictSourceResult,
+		setPropsSourceResult,
 		addIntersectionMember,
 	) => {
-		propsSourceResult((codomain, key) => isExtendedBy(codomain, source.props[key]));
+		setPropsSourceResult((codomain, key) => isExtendedBy(codomain, source.props[key]));
 	},
 );
 
@@ -271,8 +271,8 @@ extensionRegistry.register(
 		source,
 		target,
 		isExtendedBy,
-		dictSourceResult,
-		propsSourceResult,
+		setDictSourceResult,
+		setPropsSourceResult,
 		addIntersectionMember,
 	) => {
 		addIntersectionMember(source.type);

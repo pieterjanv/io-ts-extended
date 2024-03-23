@@ -45,15 +45,38 @@ export class FunctionType<
 	render: (isComposed: boolean) => string;
 }
 
+export const nullFunction = () => {};
+
 export const fn = <P extends readonly Parameter[], T extends t.Type<unknown>>(
 	parameters: P,
 	type: T,
+	implementation?: Fn<P, T>,
 ): FunctionType<P, T> => new FunctionType(
 	[parameters, type],
-	(u: unknown): u is Fn<P, T> => true,
-	(i: unknown, ctx: t.Context) => t.failure(i, ctx, 'Not implemented'),
-	() => undefined as unknown as Fn<P, T>,
+	(u: unknown): u is Fn<P, T> => u === nullFunction || u === undefined,
+	(i: unknown, ctx: t.Context) => t.success(implementation ?? nullFunction),
+	() => nullFunction,
 )
+
+export const stripNullFunctions = (
+	encoded: object,
+	processed: object[] = [],
+): object => {
+	processed.push(encoded);
+	for (const key in encoded) {
+		const p = (encoded as Record<string | number, unknown>)[key];
+		if (!p || typeof p === 'object' && processed.includes(p)) {
+			continue;
+		}
+		if (p === nullFunction) {
+			delete (encoded as Record<string | number, unknown>)[key];
+		}
+		if (typeof p === 'object') {
+			stripNullFunctions(p, processed);
+		}
+	}
+	return encoded;
+}
 
 extensionRegistry.register(
 	FunctionType,

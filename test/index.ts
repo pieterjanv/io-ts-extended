@@ -20,7 +20,8 @@ const myClss = t.clss(
 		a: string = 'foo';
 		b(a: string): boolean { return true; };
 		c: boolean = false;
-	});
+	},
+);
 
 // Array of test cases. Each case is a tuple of [source, target, expected].
 const tests1: Array<readonly [t.Type<unknown>, t.Type<unknown>, boolean]> = [

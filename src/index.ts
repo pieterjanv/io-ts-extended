@@ -13,7 +13,6 @@ export * from './types/dictionary.js';
 export * from './types/exact.js';
 export * from './types/function.js';
 export { FunctionType } from './types/function.js';
-export * from './types/generic.js';
 export * from './types/interface.js';
 export * from './types/intersection.js';
 export * from './types/keyof.js';

@@ -11,11 +11,17 @@ export type IsExtendedBy = (
 	source: t.Type<unknown>,
 ) => Ternary;
 
-export type TypeExtensionTest = (source: t.Type<unknown>, target: t.Type<unknown>, isExtendedBy: IsExtendedBy) => Ternary;
+export type TypeExtensionTest = (
+	source: t.Type<unknown>,
+	target: t.Type<unknown>,
+	isExtendedBy: IsExtendedBy,
+) => Ternary;
 
-type SourceResult = (value: Ternary) => void;
+type SetDictSourceResult = (value: Ternary) => void;
 
-type PropsSourceResult = (propExtendsCodomain: (codomain: t.Type<unknown>, key: string) => Ternary) => void;
+type SetPropsSourceResult = (
+	propExtendsCodomain: (codomain: t.Type<unknown>, key: string) => Ternary,
+) => void;
 
 export type HasExtendingProp = (
 	source: t.Type<unknown>,
@@ -33,8 +39,8 @@ type DictionaryIntersectionHandler<S extends TypeCtor, T extends TypeCtor> = (
 	source: InstanceType<S>,
 	target: InstanceType<T>,
 	isExtendedBy: IsExtendedBy,
-	dictSourceResult: SourceResult,
-	propsSourceResult: PropsSourceResult,
+	setDictSourceResult: SetDictSourceResult,
+	setPropsSourceResult: SetPropsSourceResult,
 	addIntersectionMember: (type: t.Type<unknown>) => void,
 ) => void;
 
@@ -58,11 +64,20 @@ export const extensionRegistry = new class ExtensionRegistry {
 
 	readonly _map = new Map<TypeCtor, Map<TypeCtor, TypeExtensionTest>>();
 
-	readonly _dictionaryIntersectionHandlers = new Map<TypeCtor, DictionaryIntersectionHandler<TypeCtor, TypeCtor>>();
+	readonly _dictionaryIntersectionHandlers = new Map<
+		TypeCtor,
+		DictionaryIntersectionHandler<TypeCtor, TypeCtor>
+	>();
 
-	readonly _interfaceIntersectionHandlers = new Map<TypeCtor, InterfaceIntersectionHandler<TypeCtor, TypeCtor>>();
+	readonly _interfaceIntersectionHandlers = new Map<
+		TypeCtor,
+		InterfaceIntersectionHandler<TypeCtor, TypeCtor>
+	>();
 
-	readonly _partialIntersectionHandlers = new Map<TypeCtor, PartialIntersectionHandler<TypeCtor, TypeCtor>>();
+	readonly _partialIntersectionHandlers = new Map<
+		TypeCtor,
+		PartialIntersectionHandler<TypeCtor, TypeCtor>
+	>();
 
 	register<S extends TypeCtor, T extends TypeCtor>(
 		source: S,

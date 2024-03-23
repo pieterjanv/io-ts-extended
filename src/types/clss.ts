@@ -1,5 +1,5 @@
 import * as t from 'io-ts';
-import { FunctionType, Parameter } from "./function.js";
+import { FunctionType, Parameter, stripNullFunctions } from "./function.js";
 import { isRight } from "fp-ts/lib/Either.js";
 import { unionSourceDefaultHandler, unionTargetDefaultHandler } from "./union.js";
 import { intersectionSourceDefaultHandler, intersectionTargetDefaultHandler } from "./intersection.js";
@@ -23,13 +23,29 @@ export abstract class Implementation {
 			.substring('Work.Pjvisser.Act.'.length);
 	}
 
-	public static decode<T extends typeof Implementation>(this: T, input: unknown): t.Validation<InstanceType<T>> {
+	public static decode<T extends typeof Implementation>(
+		this: T,
+		input: unknown,
+	): t.Validation<InstanceType<T>> {
 		const prototype = this.prototype;
-		const result = 	(prototype.constructor as typeof Implementation).clssType.type.decode(input);
+		const result = 	(prototype.constructor as typeof Implementation)
+			.clssType.type.decode(input);
 		if (isRight(result)) {
+			stripNullFunctions(result.right);
 			Object.setPrototypeOf(result.right, prototype);
 		}
 		return result as t.Validation<InstanceType<T>>;
+	}
+
+	public static encode<T extends typeof Implementation>(
+		this: T,
+		input: InstanceType<T>,
+	): object {
+		const type = (this.prototype.constructor as typeof Implementation)
+			.clssType
+			.type;
+		const defaultEncoded = type.encode(input);
+		return stripNullFunctions(defaultEncoded);
 	}
 };
 
@@ -124,7 +140,7 @@ export const clss: <
 		name,
 		(u: unknown): u is InstanceType<typeof ctor> => u instanceof ctor,
 		(i: unknown, ctx: t.Context) => ctor.decode<typeof ctor>(i),
-		(a: InstanceType<typeof ctor>) => instanceType.encode(a),
+		(a: InstanceType<typeof ctor>) => ctor.encode(a),
 		staticType,
 		instanceType,
 		ctor,
@@ -177,8 +193,8 @@ extensionRegistry.register(
 		source,
 		target,
 		isExtendedBy,
-		dictSourceResult,
-		propsSourceResult,
+		setDictSourceResult,
+		setPropsSourceResult,
 		addIntersectionMember,
 	) => {
 		addIntersectionMember(source.type);
