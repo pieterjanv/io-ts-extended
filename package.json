@@ -1,6 +1,6 @@
 {
   "name": "io-ts-extended",
-  "version": "1.0.0",
+  "version": "1.0.1-alpha.0",
   "description": "Type comparison for io-ts with some extras.",
   "type": "module",
   "scripts": {
@@ -33,5 +33,7 @@
     "vite": "^5.2.0"
   },
   "main": "dist/index.js",
-  "files": ["dist"]
+  "files": [
+    "dist"
+  ]
 }
