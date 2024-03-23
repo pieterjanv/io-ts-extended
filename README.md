@@ -9,17 +9,14 @@ TypeScript, alongside a few types and other utilities.
 
 Additionally, you can extend the extension testing logic with your own types.
 
-I am trying to mature this package sufficiently to justify a release on npm,
-so any feedback is greatly appreciated.
+I hope to mature this package, so any feedback is greatly appreciated. The
+package is currently in alpha.
 
 
 ## Installation
 
-Since this package is in its infancy, it is not yet available on npm. However,
-you can install it directly from GitHub using the following command:
-
 ```bash
-npm install --save git+https://github.com/pieterjanv/io-ts-extended.git
+npm install io-ts-extended
 ```
 
 
