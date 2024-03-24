@@ -7,6 +7,8 @@
   - [Extending the extension testing logic](#extending-the-extension-testing-logic)
   - [Extra types](#extra-types)
   - [Other utilities](#other-utilities)
+- [Caveats](#caveats)
+  - [`strictFunctionTypes` set to `false`](#strictfunctiontypes-set-to-false)
 
 
 ## Description
@@ -329,3 +331,13 @@ the `t.Errors` object if it is not.
 
 These are the ternary counterparts of `Array.prototype.some()` and
 `Array.prototype.every()`.
+
+
+## Caveats
+
+
+### `strictFunctionTypes` set to `false`
+
+- The package was built having `compilerOptions.strictFunctionTypes` set to
+`false` in `tsconfig.json`. The application of many functions provided by this
+package will fail to compile if this is not the case.
