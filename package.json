@@ -33,6 +33,7 @@
     "io-ts": "^2.2.21"
   },
   "devDependencies": {
+    "@types/node": "^20.11.30",
     "vite": "^5.2.0"
   },
   "main": "dist/index.js",
