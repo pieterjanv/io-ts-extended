@@ -7,8 +7,9 @@
   - [Extending the extension testing logic](#extending-the-extension-testing-logic)
   - [Extra types](#extra-types)
   - [Other utilities](#other-utilities)
-- [Caveats](#caveats)
+- [Notes](#notes)
   - [`strictFunctionTypes` set to `false`](#strictfunctiontypes-set-to-false)
+  - [Every type should be uniquely named](#every-type-should-be-uniquely-named)
 
 
 ## Description
@@ -333,7 +334,7 @@ These are the ternary counterparts of `Array.prototype.some()` and
 `Array.prototype.every()`.
 
 
-## Caveats
+## Notes
 
 
 ### `strictFunctionTypes` set to `false`
@@ -341,3 +342,11 @@ These are the ternary counterparts of `Array.prototype.some()` and
 - The package was built having `compilerOptions.strictFunctionTypes` set to
 `false` in `tsconfig.json`. The application of many functions provided by this
 package will fail to compile if this is not the case.
+
+
+### Every type should be uniquely named
+
+Some types take a name as an argument, and it is important that every type is
+uniquely named. The reason is that during the extension testing process, the
+source and target name are used to avoid infinite loops. If two types have the
+same name, the extension testing logic may give an incorrect result.
