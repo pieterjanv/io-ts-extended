@@ -1,7 +1,7 @@
 {
   "name": "io-ts-extended",
   "version": "1.0.1-alpha.2",
-  "description": "Testing if types extend one another for io-ts with some extras.",
+  "description": "Run-time testing if io-ts types extend one another, with some extras.",
   "type": "module",
   "scripts": {
     "dev": "vite",
