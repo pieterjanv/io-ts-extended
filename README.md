@@ -41,6 +41,7 @@ import * as t from 'io-ts-extended';
 
 const type1 = t.type({ a: t.string });
 const type2 = t.type({ a: t.string, b: t.number });
+
 const type2ExtendsType1 = t.isExtensionOf(type2, type1); // true
 const type1ExtendsType2 = t.isExtensionOf(type1, type2); // false
 ```
@@ -294,8 +295,8 @@ const MyClss = t.clss(
 
 #### `t.NullableType`
 
-`t.NullableType` wraps its type argument in a union that includes `null`
-and `undefined`.
+`t.NullableType` wraps its type argument in a union that includes `t.null`
+and `t.undefined`.
 
 
 #### `t.PromiseType`
@@ -307,8 +308,8 @@ the type.
 
 The `t.decode()` helper, returning a promise, can be used to decode a
 promise, resolving with the decoded value if it is of the correct type, or
-rejecting if it is not. By supplying rejection logic decoding of promises can
-be handled in a more controlled manner.
+rejecting if it is not. By supplying rejection logic the decoding of promises
+can be handled in a more controlled manner.
 
 
 ### Other utilities
@@ -339,7 +340,7 @@ These are the ternary counterparts of `Array.prototype.some()` and
 
 ### `strictFunctionTypes` set to `false`
 
-- The package was built having `compilerOptions.strictFunctionTypes` set to
+The package was built having `compilerOptions.strictFunctionTypes` set to
 `false` in `tsconfig.json`. The application of many functions provided by this
 package will fail to compile if this is not the case.
 
