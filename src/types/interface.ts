@@ -1,5 +1,5 @@
 import { extendProtype } from "../misc.js";
-import * as t from 'io-ts';
+import * as t from 'io-ts/lib/index.js';
 import { unionSourceDefaultHandler } from "./union.js";
 import { FunctionType } from "./function.js";
 import { TypeCtor, extensionRegistry } from "../extensionRegistry.js";

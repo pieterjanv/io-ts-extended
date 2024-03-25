@@ -4,7 +4,7 @@ import { readdir } from 'fs/promises';
 // Read all tests in the test files from the by-type directory, so we don't
 // accidentally miss any tests.
 const tests: Array<readonly [Array<readonly [t.Type<unknown>, t.Type<unknown>, boolean]>, string]> = await Promise.all(
-	(await readdir('./by-type'))
+	(await readdir(`${__dirname}/by-type`))
 		.map(async (file) => [
 			(await import(`./by-type/${file.replace(/\.ts$/, '.js')}`)).default,
 			file.replace(/\.ts$/, '')

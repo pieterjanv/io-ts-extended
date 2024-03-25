@@ -1,5 +1,5 @@
 import { fold } from 'fp-ts/lib/Either.js';
-import * as t from 'io-ts';
+import * as t from 'io-ts/lib/index.js';
 import { failure } from 'io-ts/lib/PathReporter.js';
 import { pipe } from 'fp-ts/lib/function.js';
 import { Ternary } from './ternary.js';
@@ -35,8 +35,10 @@ export const decode = async <A, O, I>(codec: t.Type<A, O, I>, data: I) => new Pr
 		}
 		catch (e) {
 			if (e instanceof PromiseTypeError) {
-				console.log(failure(e.errors));
+				(reject ?? onLeftDefault)(e.errors);
+				return;
 			}
+			throw e;
 		}
 	}
 );

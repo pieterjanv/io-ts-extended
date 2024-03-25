@@ -1,4 +1,4 @@
-import * as t from 'io-ts';
+import * as t from 'io-ts/lib/index.js';
 import { FunctionType, Parameter, nullFunction, stripNullFunctions } from "./function.js";
 import { isRight } from "fp-ts/lib/Either.js";
 import { unionSourceDefaultHandler, unionTargetDefaultHandler } from "./union.js";

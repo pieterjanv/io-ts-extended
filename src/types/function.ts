@@ -1,4 +1,4 @@
-import * as t from 'io-ts';
+import * as t from 'io-ts/lib/index.js';
 import { ToTsType } from '../misc.js';
 import { intersectionSourceDefaultHandler, intersectionTargetDefaultHandler } from './intersection.js';
 import { unionSourceDefaultHandler, unionTargetDefaultHandler } from './union.js';

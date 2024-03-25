@@ -2,11 +2,11 @@
   "name": "io-ts-extended",
   "version": "1.0.1-alpha.6",
   "description": "Run-time testing if io-ts types extend one another, with some extras.",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build && tsc --declaration --emitDeclarationOnly",
-    "test": "npm run build && cd test && tsc && node out/test/index.js"
+    "test": "npm run build && cd test && npm run test"
   },
   "repository": {
     "type": "git",
@@ -34,13 +34,11 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
-    "vite": "^5.2.0"
+    "vite": "^5.2.0",
+    "vite-node": "^1.4.0"
   },
   "main": "dist/index.js",
   "files": [
     "dist"
-  ],
-  "imports": {
-    "#dist": "./dist/index.js"
-  }
+  ]
 }

@@ -10,6 +10,7 @@
 - [Notes](#notes)
   - [`strictFunctionTypes` set to `false`](#strictfunctiontypes-set-to-false)
   - [Every type should be uniquely named](#every-type-should-be-uniquely-named)
+  - [Use a build tool](#use-a-build-tool)
 
 
 ## Description
@@ -25,6 +26,7 @@ Additionally, you can extend the extension testing logic with your own types.
 
 I hope to mature this package, so any feedback is greatly appreciated. The
 package is currently in alpha.
+
 
 ## Installation
 
@@ -353,3 +355,10 @@ Some types take a name as an argument, and it is important that every type is
 uniquely named. The reason is that during the extension testing process, the
 source and target name are used to avoid infinite loops. If two types have the
 same name, the extension testing logic may give an incorrect result.
+
+
+### Use a build tool
+
+This package is distributed as a typed CommonJs module, which should be no
+problem when using TypeScript. For use in a browser, use a build tool like vite
+to transpile and bundle.

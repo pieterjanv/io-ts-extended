@@ -1,4 +1,4 @@
-import * as t from 'io-ts';
+import * as t from 'io-ts/lib/index.js';
 import { intersectionTargetDefaultHandler } from "./intersection.js";
 import { ClssType } from "./clss.js";
 import { FunctionType } from "./function.js";

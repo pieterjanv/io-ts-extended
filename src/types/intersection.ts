@@ -1,4 +1,4 @@
-import * as t from 'io-ts';
+import * as t from 'io-ts/lib/index.js';
 import { extendProtype } from '../misc.js';
 import { PromiseType } from './promise.js';
 import { IsExtendedBy, extensionRegistry } from '../extensionRegistry.js';

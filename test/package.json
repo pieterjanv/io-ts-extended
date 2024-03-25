@@ -1,0 +1,9 @@
+{
+	"type": "module",
+	"scripts": {
+		"test": "tsc --noEmit && vite-node index.ts"
+	},
+	"imports": {
+		"#dist": "../dist/index.js"
+	  }
+}

@@ -1,4 +1,4 @@
-import * as t from 'io-ts';
+import * as t from 'io-ts/lib/index.js';
 import { extendProtype } from '../misc.js';
 import { Ternary, ternaryEvery, ternarySome } from '../ternary.js';
 import { IsExtendedBy, extensionRegistry } from '../extensionRegistry.js';

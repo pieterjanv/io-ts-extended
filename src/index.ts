@@ -1,4 +1,4 @@
-export * from 'io-ts';
+export * from 'io-ts/lib/index.js';
 export * from './misc.js';
 export * from './ternary.js';
 export * from './extensionRegistry.js';

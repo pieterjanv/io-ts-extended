@@ -1,5 +1,5 @@
 import { extendProtype } from "../misc.js";
-import * as t from 'io-ts';
+import * as t from 'io-ts/lib/index.js';
 import { FunctionType } from "./function.js";
 import { IsExtendedBy, extensionRegistry } from "../extensionRegistry.js";
 import { Ternary } from "../ternary.js";

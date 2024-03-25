@@ -1,6 +1,6 @@
 import { IsExtendedBy, extensionRegistry } from "../extensionRegistry.js";
 import { extendProtype } from "../misc.js";
-import * as t from 'io-ts';
+import * as t from 'io-ts/lib/index.js';
 
 export function initExact() {
 
