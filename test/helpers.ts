@@ -1,4 +1,4 @@
-import * as t from '../src/index.js';
+import * as t from '#dist';
 
 export const myClss = t.clss(
 	'T',

@@ -1,4 +1,4 @@
-import * as t from '../src/index.js';
+import * as t from '#dist';
 import { readdir } from 'fs/promises';
 
 // Read all tests in the test files from the by-type directory, so we don't

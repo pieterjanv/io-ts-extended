@@ -8,7 +8,10 @@
 		"sourceMap": true,
 		"noImplicitThis": true,
 		"outDir": "./out",
-		"rootDir": "../"
+		"rootDir": "../",
+		"paths": {
+			"#dist": ["../dist/index.d.ts"],
+		}
 	},
 	"include": ["./**/*.ts"],
 }

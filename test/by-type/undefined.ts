@@ -1,4 +1,4 @@
-import * as t from '../../src/index.js';
+import * as t from '#dist';
 import { Brand, myClss } from '../helpers.js';
 
 export default [

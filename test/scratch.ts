@@ -1,4 +1,4 @@
-import * as t from '../src/index.js';
+import * as t from '#dist';
 
 const source = t.union([t.type({ a: t.string }), t.type({ b: t.number })]);
 const target = t.record(t.string, t.union([t.string, t.number]));
