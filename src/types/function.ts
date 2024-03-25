@@ -78,77 +78,80 @@ export const stripNullFunctions = (
 	return encoded;
 }
 
-extensionRegistry.register(
-	FunctionType,
-	t.AnyType,
-	() => Ternary.True,
-	undefined,
-);
+export function initFunction() {
 
-extensionRegistry.register(
-	FunctionType,
-	FunctionType,
-	(source, target, isExtendedBy) => ternaryEvery(
-		source.parameters,
-		(parameter: Parameter, index: number) => {
-			if (!target.parameters[index]?.[1]) {
-				return Ternary.False;
+	extensionRegistry.register(
+		FunctionType,
+		t.AnyType,
+		() => Ternary.True,
+		undefined,
+	);
+
+	extensionRegistry.register(
+		FunctionType,
+		FunctionType,
+		(source, target, isExtendedBy) => ternaryEvery(
+			source.parameters,
+			(parameter: Parameter, index: number) => {
+				if (!target.parameters[index]?.[1]) {
+					return Ternary.False;
+				}
+				return (
+					(parameter[0] === target.parameters[index]?.[0] ? Ternary.True : Ternary.False) &
+					isExtendedBy(parameter[1], target.parameters[index]?.[1] ?? t.never) ||
+					isExtendedBy(target.parameters[index]?.[1] ?? t.never, parameter[1])
+				);
 			}
-			return (
-				(parameter[0] === target.parameters[index]?.[0] ? Ternary.True : Ternary.False) &
-				isExtendedBy(parameter[1], target.parameters[index]?.[1] ?? t.never) ||
-				isExtendedBy(target.parameters[index]?.[1] ?? t.never, parameter[1])
-			);
-		}
-	) & isExtendedBy(target.type, source.type),
-	undefined,
-);
+		) & isExtendedBy(target.type, source.type),
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.IntersectionType,
-	FunctionType,
-	intersectionSourceDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register(
+		t.IntersectionType,
+		FunctionType,
+		intersectionSourceDefaultHandler,
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.UnionType,
-	FunctionType,
-	unionSourceDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register(
+		t.UnionType,
+		FunctionType,
+		unionSourceDefaultHandler,
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.ReadonlyType,
-	FunctionType,
-	(source, target, isExtendedBy) => isExtendedBy(target, source.type),
-	undefined,
-);
+	extensionRegistry.register(
+		t.ReadonlyType,
+		FunctionType,
+		(source, target, isExtendedBy) => isExtendedBy(target, source.type),
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.RefinementType,
-	FunctionType,
-	(source, target, isExtendedBy) => isExtendedBy(target, source.type),
-	undefined,
-);
+	extensionRegistry.register(
+		t.RefinementType,
+		FunctionType,
+		(source, target, isExtendedBy) => isExtendedBy(target, source.type),
+		undefined,
+	);
 
-extensionRegistry.register(
-	FunctionType,
-	t.IntersectionType,
-	intersectionTargetDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register(
+		FunctionType,
+		t.IntersectionType,
+		intersectionTargetDefaultHandler,
+		undefined,
+	);
 
-extensionRegistry.register(
-	FunctionType,
-	t.UnionType,
-	unionTargetDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register(
+		FunctionType,
+		t.UnionType,
+		unionTargetDefaultHandler,
+		undefined,
+	);
 
-extensionRegistry.register(
-	FunctionType,
-	t.UnknownType,
-	() => Ternary.True,
-	undefined,
-);
+	extensionRegistry.register(
+		FunctionType,
+		t.UnknownType,
+		() => Ternary.True,
+		undefined,
+	);
+}

@@ -8,6 +8,7 @@ export default [
 	[t.array(t.unknown), t.unknown, true],
 	[t.bigint, t.unknown, true],
 	[t.boolean, t.unknown, true],
+	[myClss, t.unknown, true],
 	[myClss, t.union([myClss, t.unknown]), true],
 	[t.record(t.string, t.string), t.unknown, true],
 	[t.exact(t.type({ a: t.string })), t.unknown, true],

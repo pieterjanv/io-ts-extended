@@ -5,52 +5,55 @@ import { unionSourceDefaultHandler } from './union.js';
 import { IsExtendedBy, extensionRegistry } from '../extensionRegistry.js';
 import { Ternary } from '../ternary.js';
 
-extendProtype(t.AnyArrayType, {
-	render() { return `unknown[]` },
-});
+export function initAnyArray() {
 
-extensionRegistry.register(
-	t.AnyArrayType,
-	t.AnyArrayType,
-	() => Ternary.True,
-	undefined,
-);
-
-extensionRegistry.register(
-	t.ArrayType,
-	t.AnyArrayType,
-	() => Ternary.True,
-	undefined,
-);
-
-extensionRegistry.register(
-	t.TupleType,
-	t.AnyArrayType,
-	() => Ternary.True,
-	undefined,
-);
-
-extensionRegistry.register(
-	t.RefinementType,
-	t.AnyArrayType,
-	(
-		source,
-		target,
-		isExtendedBy: IsExtendedBy,
-	) => isExtendedBy(target, source.type),
-	undefined,
-)
-
-extensionRegistry.register(
-	t.IntersectionType,
-	t.AnyArrayType,
-	intersectionSourceDefaultHandler,
-	undefined,
-);
-
-extensionRegistry.register(
-	t.UnionType,
-	t.AnyArrayType,
-	unionSourceDefaultHandler,
-	undefined,
-);
+	extendProtype(t.AnyArrayType, {
+		render() { return `unknown[]` },
+	});
+	
+	extensionRegistry.register(
+		t.AnyArrayType,
+		t.AnyArrayType,
+		() => Ternary.True,
+		undefined,
+	);
+	
+	extensionRegistry.register(
+		t.ArrayType,
+		t.AnyArrayType,
+		() => Ternary.True,
+		undefined,
+	);
+	
+	extensionRegistry.register(
+		t.TupleType,
+		t.AnyArrayType,
+		() => Ternary.True,
+		undefined,
+	);
+	
+	extensionRegistry.register(
+		t.RefinementType,
+		t.AnyArrayType,
+		(
+			source,
+			target,
+			isExtendedBy: IsExtendedBy,
+		) => isExtendedBy(target, source.type),
+		undefined,
+	)
+	
+	extensionRegistry.register(
+		t.IntersectionType,
+		t.AnyArrayType,
+		intersectionSourceDefaultHandler,
+		undefined,
+	);
+	
+	extensionRegistry.register(
+		t.UnionType,
+		t.AnyArrayType,
+		unionSourceDefaultHandler,
+		undefined,
+	);
+}

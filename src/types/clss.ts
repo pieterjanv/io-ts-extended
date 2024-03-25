@@ -116,10 +116,10 @@ export type AnyClssType = ClssType<
 	typeof Implementation
 >;
 
-const flattenInstance = (
+function flattenInstance (
 	instance: Record<string | number, unknown>,
 	result: Record<string | number, unknown> = {},
-): Record<string | number, unknown> => {
+): Record<string | number, unknown> {
 
 	for (const [k, v] of Object.entries(Object.getOwnPropertyDescriptors(instance))) {
 		result[k] ??= typeof v.value === 'function'
@@ -134,7 +134,6 @@ const flattenInstance = (
 
 	return result;
 }
-
 
 export const clss: <
 	S extends t.Type<object>,
@@ -181,173 +180,183 @@ export const extendClss = <
 	);
 };
 
-extensionRegistry.register(
-	ClssType,
-	t.AnyType,
-	() => Ternary.True,
-	undefined,
-);
+export function initClss() {
 
-extensionRegistry.register(
-	ClssType,
-	t.AnyDictionaryType,
-	() => Ternary.True,
-	undefined,
-);
+	extensionRegistry.register(
+		ClssType,
+		t.AnyType,
+		() => Ternary.True,
+		undefined,
+	);
 
-extensionRegistry.register(
-	ClssType,
-	t.DictionaryType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => isExtendedBy(target, source.type),
-	(
-		source,
-		target,
-		isExtendedBy,
-		setDictSourceResult,
-		setPropsSourceResult,
-		addIntersectionMember,
-	) => {
-		addIntersectionMember(source.type);
-	},
-);
+	extensionRegistry.register(
+		ClssType,
+		t.AnyDictionaryType,
+		() => Ternary.True,
+		undefined,
+	);
 
-extensionRegistry.register<
-	typeof ClssType,
-	typeof t.InterfaceType<Record<string, t.Type<unknown>>>
->(
-	ClssType,
-	t.InterfaceType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => isExtendedBy(target, source.type),
-	(
-		source,
-		targetKey,
-		targetType,
-		isExtendedBy,
-		hasExtendingProp,
-	) => hasExtendingProp(source.type, targetKey, targetType),
-);
+	extensionRegistry.register(
+		ClssType,
+		t.DictionaryType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target, source.type),
+		(
+			source,
+			target,
+			isExtendedBy,
+			setDictSourceResult,
+			setPropsSourceResult,
+			addIntersectionMember,
+		) => {
+			addIntersectionMember(source.type);
+		},
+	);
 
-extensionRegistry.register<
-	typeof ClssType,
-	typeof t.PartialType<Record<string, t.Type<unknown>>>
->(
-	ClssType,
-	t.PartialType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => isExtendedBy(target, source.type),
-	(
-		source,
-		targetKey,
-		targetType,
-		isExtendedBy,
-		hasPartiallyExtendingProp,
-	) => hasPartiallyExtendingProp(source.type, targetKey, targetType),
-);
+	extensionRegistry.register<
+		typeof ClssType,
+		typeof t.InterfaceType<Record<string, t.Type<unknown>>>
+	>(
+		ClssType,
+		t.InterfaceType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target, source.type),
+		(
+			source,
+			targetKey,
+			targetType,
+			isExtendedBy,
+			hasExtendingProp,
+		) => hasExtendingProp(source.type, targetKey, targetType),
+	);
 
-extensionRegistry.register(
-	ClssType,
-	t.IntersectionType,
-	intersectionTargetDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register<
+		typeof ClssType,
+		typeof t.PartialType<Record<string, t.Type<unknown>>>
+	>(
+		ClssType,
+		t.PartialType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target, source.type),
+		(
+			source,
+			targetKey,
+			targetType,
+			isExtendedBy,
+			hasPartiallyExtendingProp,
+		) => hasPartiallyExtendingProp(source.type, targetKey, targetType),
+	);
 
-extensionRegistry.register(
-	ClssType,
-	t.UnionType,
-	unionTargetDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register(
+		ClssType,
+		t.IntersectionType,
+		intersectionTargetDefaultHandler,
+		undefined,
+	);
 
-extensionRegistry.register(
-	ClssType,
-	t.ExactType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => isExtendedBy(target, source.type),
-	undefined,
-);
+	extensionRegistry.register(
+		ClssType,
+		t.UnionType,
+		unionTargetDefaultHandler,
+		undefined,
+	);
 
-extensionRegistry.register(
-	ClssType,
-	t.ReadonlyType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => isExtendedBy(target, source.type),
-	undefined,
-);
+	extensionRegistry.register(
+		ClssType,
+		t.UnknownType,
+		() => Ternary.True,
+		undefined,
+	);
 
-extensionRegistry.register(
-	ClssType,
-	t.RefinementType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => isExtendedBy(target, source.type),
-	undefined,
-);
+	extensionRegistry.register(
+		ClssType,
+		t.ExactType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target, source.type),
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.RefinementType,
-	ClssType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => isExtendedBy(target, source.type),
-	undefined,
-);
+	extensionRegistry.register(
+		ClssType,
+		t.ReadonlyType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target, source.type),
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.ReadonlyType,
-	ClssType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => isExtendedBy(target, source.type),
-	undefined,
-);
+	extensionRegistry.register(
+		ClssType,
+		t.RefinementType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target, source.type),
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.IntersectionType,
-	ClssType,
-	intersectionSourceDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register(
+		t.RefinementType,
+		ClssType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target, source.type),
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.UnionType,
-	ClssType,
-	unionSourceDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register(
+		t.ReadonlyType,
+		ClssType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target, source.type),
+		undefined,
+	);
 
-extensionRegistry.register(
-	ClssType,
-	ClssType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => (
-		isExtendedBy(target.type, source.type) &
-		isExtendedBy(target.staticType, source.staticType)
-	),
-	undefined,
-);
+	extensionRegistry.register(
+		t.IntersectionType,
+		ClssType,
+		intersectionSourceDefaultHandler,
+		undefined,
+	);
+
+	extensionRegistry.register(
+		t.UnionType,
+		ClssType,
+		unionSourceDefaultHandler,
+		undefined,
+	);
+
+	extensionRegistry.register(
+		ClssType,
+		ClssType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => (
+			isExtendedBy(target.type, source.type) &
+			isExtendedBy(target.staticType, source.staticType)
+		),
+		undefined,
+	);
+}

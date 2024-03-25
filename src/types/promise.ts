@@ -51,73 +51,76 @@ export const promise = <T extends t.Type<unknown>>(type: T): PromiseType<t.TypeO
 	(a: Promise<t.TypeOf<T>>) => a,
 )
 
-extensionRegistry.register(
-	t.IntersectionType,
-	PromiseType,
-	intersectionSourceDefaultHandler,
-	undefined,
-);
+export function initPromise() {
 
-extensionRegistry.register(
-	t.UnionType,
-	PromiseType,
-	unionSourceDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register(
+		t.IntersectionType,
+		PromiseType,
+		intersectionSourceDefaultHandler,
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.ReadonlyType,
-	PromiseType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => isExtendedBy(target, source.type),
-	undefined,
-);
+	extensionRegistry.register(
+		t.UnionType,
+		PromiseType,
+		unionSourceDefaultHandler,
+		undefined,
+	);
 
-extensionRegistry.register(
-	PromiseType,
-	t.AnyType,
-	() => Ternary.True,
-	undefined,
-);
+	extensionRegistry.register(
+		t.ReadonlyType,
+		PromiseType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target, source.type),
+		undefined,
+	);
 
-extensionRegistry.register(
-	PromiseType,
-	PromiseType,
-	(source, target, isExtendedBy) => isExtendedBy(target.type, source.type),
-	undefined,
-);
+	extensionRegistry.register(
+		PromiseType,
+		t.AnyType,
+		() => Ternary.True,
+		undefined,
+	);
 
-extensionRegistry.register(
-	PromiseType,
-	t.IntersectionType,
-	intersectionTargetDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register(
+		PromiseType,
+		PromiseType,
+		(source, target, isExtendedBy) => isExtendedBy(target.type, source.type),
+		undefined,
+	);
 
-extensionRegistry.register(
-	PromiseType,
-	t.UnionType,
-	unionTargetDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register(
+		PromiseType,
+		t.IntersectionType,
+		intersectionTargetDefaultHandler,
+		undefined,
+	);
 
-extensionRegistry.register(
-	PromiseType,
-	t.ReadonlyType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => isExtendedBy(target.type, source),
-	undefined,
-);
+	extensionRegistry.register(
+		PromiseType,
+		t.UnionType,
+		unionTargetDefaultHandler,
+		undefined,
+	);
 
-extensionRegistry.register(
-	PromiseType,
-	t.UnknownType,
-	() => Ternary.True,
-	undefined,
-);
+	extensionRegistry.register(
+		PromiseType,
+		t.ReadonlyType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target.type, source),
+		undefined,
+	);
+
+	extensionRegistry.register(
+		PromiseType,
+		t.UnknownType,
+		() => Ternary.True,
+		undefined,
+	);
+}

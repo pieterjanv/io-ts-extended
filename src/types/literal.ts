@@ -5,71 +5,74 @@ import { unionSourceDefaultHandler } from './union.js';
 import { extensionRegistry } from '../extensionRegistry.js';
 import { Ternary } from '../ternary.js';
 
-extendProtype(t.LiteralType, {
-	render() { return typeof this.value === 'string'
-		? `"${this.value}"`
-		: this.value.toString();
-	},
-});
+export function initLiteral() {
 
-extensionRegistry.register(
-	t.LiteralType,
-	t.LiteralType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => source.value === target.value
-		? Ternary.True
-		: Ternary.False,
-	undefined,
-);
+	extendProtype(t.LiteralType, {
+		render() { return typeof this.value === 'string'
+			? `"${this.value}"`
+			: this.value.toString();
+		},
+	});
 
-extensionRegistry.register(
-	t.KeyofType,
-	t.LiteralType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => Object.keys(source.keys).every(key => key === target.value)
-		? Ternary.True
-		: Ternary.False,
-	undefined,
-);
+	extensionRegistry.register(
+		t.LiteralType,
+		t.LiteralType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => source.value === target.value
+			? Ternary.True
+			: Ternary.False,
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.ReadonlyType,
-	t.LiteralType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => isExtendedBy(target, source.type),
-	undefined,
-);
+	extensionRegistry.register(
+		t.KeyofType,
+		t.LiteralType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => Object.keys(source.keys).every(key => key === target.value)
+			? Ternary.True
+			: Ternary.False,
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.RefinementType,
-	t.LiteralType,
-	(
-		source,
-		target,
-		isExtendedBy,
-	) => isExtendedBy(target, source.type),
-	undefined,
-);
+	extensionRegistry.register(
+		t.ReadonlyType,
+		t.LiteralType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target, source.type),
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.IntersectionType,
-	t.LiteralType,
-	intersectionSourceDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register(
+		t.RefinementType,
+		t.LiteralType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target, source.type),
+		undefined,
+	);
 
-extensionRegistry.register(
-	t.UnionType,
-	t.LiteralType,
-	unionSourceDefaultHandler,
-	undefined,
-);
+	extensionRegistry.register(
+		t.IntersectionType,
+		t.LiteralType,
+		intersectionSourceDefaultHandler,
+		undefined,
+	);
+
+	extensionRegistry.register(
+		t.UnionType,
+		t.LiteralType,
+		unionSourceDefaultHandler,
+		undefined,
+	);
+}
