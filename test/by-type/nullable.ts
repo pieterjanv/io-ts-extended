@@ -33,4 +33,5 @@ export default [
 	[t.nullable(t.string), t.nullable(t.nullable(t.string)), true],
 	[t.promise(t.nullable(t.string)), t.nullable(t.promise(t.nullable(t.string))), true],
 	[t.string, t.nullable(t.number), false],
+	[t.void, t.nullable(t.void), true],
 ] as readonly [t.Type<unknown>, t.Type<unknown>, boolean][];

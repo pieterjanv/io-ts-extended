@@ -12,7 +12,7 @@ export default [
 	[t.record(t.string, t.string), t.exact(t.type({})), false],
 	[t.record(t.string, t.string), t.exact(t.type({ a: t.string })), false],
 	[t.exact(t.type({ a: t.string })), t.exact(t.type({ a: t.string })), true],
-	[t.fn([['a', t.string]] as const, t.boolean), t.type({ a: t.string }), false],
+	[t.fn([['a', t.string]] as const, t.boolean), t.exact(t.type({ a: t.string })), false],
 	[t.type({ a: t.string }), t.exact(t.type({ a: t.string })), true],
 	[t.intersection([t.type({ a: t.string }), t.type({ b: t.number })]), t.exact(t.type({ a: t.string })), true],
 	[t.intersection([t.type({ a: t.string }), t.type({ b: t.number })]), t.exact(t.type({ a: t.string, b: t.number })), true],

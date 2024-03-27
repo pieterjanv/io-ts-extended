@@ -34,6 +34,7 @@ export default [
 	[t.union([t.string, t.promise(t.union([t.never, t.string]))]), t.promise(t.union([t.never, t.string])), false],
 	[t.unknown, t.promise(t.unknown), false],
 	[t.promise(t.string), t.promise(t.string), true],
+	[t.void, t.promise(t.void), false],
 	[t.nullable(t.promise(t.string)), t.promise(t.nullable(t.promise(t.string))), false],
 	[t.promise(t.promise(t.string)), t.promise(t.promise(t.promise(t.string))), false],
 ] as readonly [t.Type<unknown>, t.Type<unknown>, boolean][];

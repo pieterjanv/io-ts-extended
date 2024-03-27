@@ -5,6 +5,7 @@ import { unionSourceDefaultHandler, unionTargetDefaultHandler } from "./union.js
 import { intersectionSourceDefaultHandler, intersectionTargetDefaultHandler } from "./intersection.js";
 import { extensionRegistry } from '../extensionRegistry.js';
 import { Ternary } from '../ternary.js';
+import { trivialTest } from '../misc.js';
 
 export abstract class Implementation {
 
@@ -185,14 +186,14 @@ export function initClss() {
 	extensionRegistry.register(
 		ClssType,
 		t.AnyType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		ClssType,
 		t.AnyDictionaryType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 
@@ -273,7 +274,7 @@ export function initClss() {
 	extensionRegistry.register(
 		ClssType,
 		t.UnknownType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 

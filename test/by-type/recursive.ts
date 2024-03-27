@@ -14,6 +14,7 @@ export default [
 	[t.record(t.string, t.string), t.recursion('T', (self) => t.record(t.string, t.union([self, t.string]))), true],
 	[t.record(t.string, t.record(t.string, t.record(t.string, t.string))), t.recursion('T', (self) => t.record(t.string, t.union([self, t.string]))), true],
 	[t.exact(t.type({ a: t.string })), t.recursion('T', (self) => t.type({ a: t.string, b: self })), false],
+	[t.fn([['a', t.string]] as const, t.boolean), t.recursion('T', () => t.type({})), false],
 	[t.recursion('T', (self) => t.fn([['a', t.string], ['b', self]] as const, t.boolean)), t.recursion('U', (self) => t.fn([['a', t.string], ['b', self]] as const, t.boolean)), true],
 	[t.recursion('T', (self) => t.fn([['a', t.string]] as const, t.boolean)), t.recursion('V', (self) => t.fn([['a', t.string], ['b', self]] as const, t.boolean)), true],
 	[t.recursion('T', (self) => t.fn([['a', t.string], ['b', t.fn([['a', t.string]] as const, t.boolean)]] as const, t.boolean)), t.recursion('W', (self) => t.fn([['a', t.string], ['b', self]] as const, t.boolean)), true],

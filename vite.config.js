@@ -11,4 +11,7 @@ export default {
 			external: (id) => id.includes('/node_modules/'),
 		},
 	},
+	esbuild: {
+		keepNames: true,
+	}
 };

@@ -96,3 +96,5 @@ export const isDerivedFrom = <
 );
 
 export let _brand: keyof t.Brand<unknown>;
+
+export const trivialTest = () => Ternary.True;

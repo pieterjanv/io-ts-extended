@@ -1,5 +1,5 @@
 import * as t from 'io-ts/lib/index.js';
-import { extendProtype } from '../misc.js';
+import { extendProtype, trivialTest } from '../misc.js';
 import { NullableType } from './nullable.js';
 import { extensionRegistry } from '../extensionRegistry.js';
 import { Ternary } from '../ternary.js';
@@ -15,7 +15,7 @@ export function initUndefined() {
 	extensionRegistry.register(
 		t.UndefinedType,
 		t.UndefinedType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 	

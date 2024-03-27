@@ -5,6 +5,7 @@ import { FunctionType } from "./function.js";
 import { PromiseType } from "./promise.js";
 import { IsExtendedBy, extensionRegistry } from '../extensionRegistry.js';
 import { Ternary } from '../ternary.js';
+import { trivialTest } from '../misc.js';
 
 export type Nullable<T> = T | null | undefined;
 
@@ -59,7 +60,7 @@ export function initNullable() {
 	extensionRegistry.register(
 		NullableType,
 		t.AnyType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 
@@ -140,7 +141,7 @@ export function initNullable() {
 	extensionRegistry.register(
 		NullableType,
 		t.UnknownType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 

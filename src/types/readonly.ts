@@ -1,4 +1,4 @@
-import { extendProtype } from "../misc.js";
+import { extendProtype, trivialTest } from "../misc.js";
 import * as t from 'io-ts/lib/index.js';
 import { FunctionType } from "./function.js";
 import { IsExtendedBy, extensionRegistry } from "../extensionRegistry.js";
@@ -44,7 +44,7 @@ export function initReadonly() {
 	extensionRegistry.register(
 		t.ReadonlyType,
 		t.UnknownType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 

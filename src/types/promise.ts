@@ -1,5 +1,5 @@
 import * as t from 'io-ts/lib/index.js';
-import { PromiseTypeError } from '../misc.js';
+import { PromiseTypeError, trivialTest } from '../misc.js';
 import { isLeft } from 'fp-ts/lib/Either.js';
 import { unionSourceDefaultHandler, unionTargetDefaultHandler } from './union.js';
 import { intersectionSourceDefaultHandler, intersectionTargetDefaultHandler } from './intersection.js';
@@ -81,7 +81,7 @@ export function initPromise() {
 	extensionRegistry.register(
 		PromiseType,
 		t.AnyType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 
@@ -120,7 +120,7 @@ export function initPromise() {
 	extensionRegistry.register(
 		PromiseType,
 		t.UnknownType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 }

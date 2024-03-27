@@ -1,4 +1,4 @@
-import { extendProtype } from "../misc.js";
+import { extendProtype, trivialTest } from "../misc.js";
 import * as t from 'io-ts/lib/index.js';
 import { NullableType } from "./nullable.js";
 import { intersectionSourceDefaultHandler } from "./intersection.js";
@@ -15,7 +15,7 @@ export function initBoolean() {
 	extensionRegistry.register(
 		t.BooleanType,
 		t.BooleanType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 

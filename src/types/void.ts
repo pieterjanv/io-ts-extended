@@ -1,5 +1,5 @@
 import * as t from 'io-ts/lib/index.js';
-import { extendProtype } from "../misc.js";
+import { extendProtype, trivialTest } from "../misc.js";
 import { intersectionSourceDefaultHandler } from './intersection.js';
 import { unionSourceDefaultHandler } from './union.js';
 import { extensionRegistry } from '../extensionRegistry.js';
@@ -14,14 +14,14 @@ export function initVoid() {
 	extensionRegistry.register(
 		t.VoidType,
 		t.VoidType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.UndefinedType,
 		t.VoidType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 

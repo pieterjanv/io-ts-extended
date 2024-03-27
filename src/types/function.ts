@@ -1,5 +1,5 @@
 import * as t from 'io-ts/lib/index.js';
-import { ToTsType } from '../misc.js';
+import { ToTsType, trivialTest } from '../misc.js';
 import { intersectionSourceDefaultHandler, intersectionTargetDefaultHandler } from './intersection.js';
 import { unionSourceDefaultHandler, unionTargetDefaultHandler } from './union.js';
 import { extensionRegistry } from '../extensionRegistry.js';
@@ -83,7 +83,7 @@ export function initFunction() {
 	extensionRegistry.register(
 		FunctionType,
 		t.AnyType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 
@@ -151,7 +151,7 @@ export function initFunction() {
 	extensionRegistry.register(
 		FunctionType,
 		t.UnknownType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 }

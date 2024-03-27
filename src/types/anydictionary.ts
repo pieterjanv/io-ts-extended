@@ -1,5 +1,5 @@
 import * as t from 'io-ts/lib/index.js';
-import { extendProtype } from "../misc.js";
+import { extendProtype, trivialTest } from "../misc.js";
 import { NullableType } from "./nullable.js";
 import { intersectionSourceDefaultHandler } from './intersection.js';
 import { unionSourceDefaultHandler } from './union.js';
@@ -15,28 +15,28 @@ export function initAnyDictionary() {
 	extensionRegistry.register(
 		t.AnyDictionaryType,
 		t.AnyDictionaryType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.DictionaryType,
 		t.AnyDictionaryType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.InterfaceType,
 		t.AnyDictionaryType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.PartialType,
 		t.AnyDictionaryType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 

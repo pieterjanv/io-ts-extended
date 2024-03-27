@@ -21,6 +21,7 @@ export default [
 	[t.intersection([t.type({ a: t.string }), t.type({ b: t.number })]), t.record(t.string, t.union([t.string, t.number])), true],
 	[t.intersection([t.type({ a: t.string }), t.type({ b: t.number })]), t.record(t.string, t.union([t.intersection([t.string, t.union([t.never, t.unknown])]), t.number])), true],
 	[t.intersection([t.type({ a: t.string }), t.type({ b: t.number })]), t.record(t.string, t.union([t.intersection([t.string, t.union([t.never, t.boolean])]), t.number])), false],
+	[t.intersection([t.record(t.string, t.string), t.partial({ a: t.string }), t.type({ a: t.literal('s') })]), t.record(t.string, t.string), true],
 	[t.keyof({ a: null, b: null }), t.record(t.string, t.string), false],
 	[t.literal('a'), t.record(t.string, t.string), false],
 	[t.never, t.record(t.string, t.string), true],

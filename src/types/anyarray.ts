@@ -1,5 +1,5 @@
 import * as t from 'io-ts/lib/index.js';
-import { extendProtype } from "../misc.js";
+import { extendProtype, trivialTest } from "../misc.js";
 import { intersectionSourceDefaultHandler } from './intersection.js';
 import { unionSourceDefaultHandler } from './union.js';
 import { IsExtendedBy, extensionRegistry } from '../extensionRegistry.js';
@@ -14,21 +14,21 @@ export function initAnyArray() {
 	extensionRegistry.register(
 		t.AnyArrayType,
 		t.AnyArrayType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 	
 	extensionRegistry.register(
 		t.ArrayType,
 		t.AnyArrayType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 	
 	extensionRegistry.register(
 		t.TupleType,
 		t.AnyArrayType,
-		() => Ternary.True,
+		trivialTest,
 		undefined,
 	);
 	
