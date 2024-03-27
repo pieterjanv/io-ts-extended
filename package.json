@@ -1,6 +1,6 @@
 {
   "name": "io-ts-extended",
-  "version": "1.0.1-alpha.7",
+  "version": "1.0.1-alpha.8",
   "description": "Run-time testing if io-ts types extend one another, with some extras.",
   "type": "commonjs",
   "scripts": {
