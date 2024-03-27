@@ -24,8 +24,8 @@ TypeScript, alongside a few types and other utilities.
 
 Additionally, you can add extension testing logic for your own types.
 
-I hope to mature this package, so any feedback is greatly appreciated. The
-package is currently in alpha.
+I hope to mature this package, so any feedback is greatly appreciated. It's
+currently in beta.
 
 
 ## Installation
