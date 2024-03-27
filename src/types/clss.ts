@@ -111,7 +111,7 @@ export class ClssType<
 	};
 }
 
-export type AnyClssType = ClssType<
+type AnyClssType = ClssType<
 	t.Type<object>,
 	t.Type<object>,
 	typeof Implementation

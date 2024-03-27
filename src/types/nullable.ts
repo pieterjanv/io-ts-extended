@@ -43,13 +43,13 @@ export const nullable = <T extends t.Type<unknown>>(type: T): NullableType<t.Typ
 	(a: NullableType<t.TypeOf<T>>) => a,
 )
 
-export const nullSourceDefaultHandler = (
+const nullableSourceDefaultHandler = (
 	source: NullableType<unknown>,
 	target: t.Type<unknown>,
 	isExtendedBy: IsExtendedBy,
 ): Ternary => isExtendedBy(target, source.type);
 
-export const nullTargetDefaultHandler = (
+const nullableTargetDefaultHandler = (
 	source: t.Type<unknown>,
 	target: NullableType<unknown>,
 	isExtendedBy: IsExtendedBy,
@@ -74,56 +74,56 @@ export function initNullable() {
 	extensionRegistry.register(
 		NullableType,
 		t.UnionType,
-		nullSourceDefaultHandler,
+		nullableSourceDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		NullableType,
 		t.ExactType,
-		nullSourceDefaultHandler,
+		nullableSourceDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		NullableType,
 		t.ReadonlyType,
-		nullSourceDefaultHandler,
+		nullableSourceDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		NullableType,
 		t.RefinementType,
-		nullSourceDefaultHandler,
+		nullableSourceDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.RefinementType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.ReadonlyType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.UnionType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		ClssType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
@@ -148,189 +148,189 @@ export function initNullable() {
 	extensionRegistry.register(
 		t.AnyArrayType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.AnyDictionaryType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.AnyType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.ArrayType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.BigIntType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.BooleanType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.DictionaryType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.ExactType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		FunctionType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.InterfaceType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.IntersectionType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.KeyofType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.LiteralType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.NeverType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.NullType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.NumberType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.PartialType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		PromiseType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.ReadonlyArrayType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.ReadonlyType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.RecursiveType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.RefinementType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.StringType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.TupleType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.UndefinedType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.UnknownType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 
 	extensionRegistry.register(
 		t.VoidType,
 		NullableType,
-		nullTargetDefaultHandler,
+		nullableTargetDefaultHandler,
 		undefined,
 	);
 }
