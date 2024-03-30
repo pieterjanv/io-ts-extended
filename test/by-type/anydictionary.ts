@@ -1,5 +1,5 @@
 import * as t from '#dist';
-import { myClss, Brand } from '../helpers.js';
+import * as helpers from '../helpers.js';;
 
 export default [
 	[
@@ -33,7 +33,7 @@ export default [
 		false,
 	],
 	[
-		myClss,
+		helpers.myClss,
 		new t.AnyDictionaryType,
 		true,
 	],
@@ -103,12 +103,12 @@ export default [
 		true,
 	],
 	[
-		t.recursion('T', (self) => t.type({ a: t.string, b: self })),
+		helpers.v1,
 		new t.AnyDictionaryType,
 		true,
 	],
 	[
-		t.brand(new t.AnyDictionaryType, (x): x is t.Branded<Record<string, unknown>, Brand> => true, 'Brand'),
+		t.brand(new t.AnyDictionaryType, (x): x is t.Branded<Record<string, unknown>, helpers.Brand> => true, 'Brand'),
 		new t.AnyDictionaryType,
 		true,
 	],

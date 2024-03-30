@@ -1,5 +1,5 @@
 import * as t from '#dist';
-import { Brand, myClss } from '../helpers.js';
+import * as helpers from '../helpers.js';;
 
 export default [
 	[
@@ -33,8 +33,8 @@ export default [
 		false,
 	],
 	[
-		myClss,
-		t.promise(myClss),
+		helpers.myClss,
+		t.promise(helpers.myClss),
 		false,
 	],
 	[
@@ -113,18 +113,18 @@ export default [
 		true,
 	],
 	[
-		t.recursion('T', (self) => t.type({ a: t.string, b: self })),
-		t.promise(t.recursion('T', (self) => t.type({ a: t.string, b: self }))),
+		helpers.v1,
+		t.promise(helpers.v1),
 		false,
 	],
 	[
-		t.brand(t.promise(t.string), (x): x is t.Branded<Promise<string>, Brand> => true, 'Brand'),
-		t.promise(t.brand(t.promise(t.string), (x): x is t.Branded<Promise<string>, Brand> => true, 'Brand')),
+		t.brand(t.promise(t.string), (x): x is t.Branded<Promise<string>, helpers.Brand> => true, 'Brand'),
+		t.promise(t.brand(t.promise(t.string), (x): x is t.Branded<Promise<string>, helpers.Brand> => true, 'Brand')),
 		false,
 	],
 	[
-		t.promise(t.brand(t.promise(t.string), (x): x is t.Branded<Promise<string>, Brand> => true, 'Brand')),
-		t.promise(t.brand(t.promise(t.string), (x): x is t.Branded<Promise<string>, Brand> => true, 'Brand')),
+		t.promise(t.brand(t.promise(t.string), (x): x is t.Branded<Promise<string>, helpers.Brand> => true, 'Brand')),
+		t.promise(t.brand(t.promise(t.string), (x): x is t.Branded<Promise<string>, helpers.Brand> => true, 'Brand')),
 		true,
 	],
 	[

@@ -216,7 +216,7 @@ export function initReadonly() {
 	extensionRegistry.register(
 		t.UnknownType,
 		t.ReadonlyType,
-		readonlyTargetDefaultHandler,
+		() => Ternary.False,
 		undefined,
 	);
 

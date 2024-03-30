@@ -1,5 +1,5 @@
 import * as t from '#dist';
-import { Brand, myClss } from '../helpers.js';
+import * as helpers from '../helpers.js';;
 
 export default [
 	[
@@ -33,14 +33,14 @@ export default [
 		false,
 	],
 	[
-		myClss,
+		helpers.myClss,
 		t.exact(t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean), c: t.boolean })),
 		true,
 	],
 	[
 		t.record(t.string, t.string),
-		t.exact(t.type({})),
-		false,
+		t.exact(t.type(helpers.emptyProps)),
+		true,
 	],
 	[
 		t.record(t.string, t.string),
@@ -103,8 +103,8 @@ export default [
 		false,
 	],
 	[
-		t.partial({}),
-		t.exact(t.type({})),
+		t.partial(helpers.emptyProps),
+		t.exact(t.type(helpers.emptyProps)),
 		true,
 	],
 	[
@@ -118,12 +118,12 @@ export default [
 		true,
 	],
 	[
-		t.recursion('T', (self) => t.type({ a: t.string, b: self })),
+		helpers.v1,
 		t.exact(t.type({ a: t.string })),
 		true,
 	],
 	[
-		t.brand(t.type({a: t.string}), (x): x is t.Branded<{a: string}, Brand> => true, 'Brand'),
+		t.brand(t.type({a: t.string}), (x): x is t.Branded<{a: string}, helpers.Brand> => true, 'Brand'),
 		t.exact(t.type({ a: t.string })),
 		true,
 	],

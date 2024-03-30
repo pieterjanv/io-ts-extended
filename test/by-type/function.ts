@@ -1,5 +1,5 @@
 import * as t from '#dist';
-import { Brand, myClss } from '../helpers.js';
+import * as helpers from '../helpers.js';;
 
 export default [
 	[
@@ -28,7 +28,7 @@ export default [
 		false,
 	],
 	[
-		myClss,
+		helpers.myClss,
 		t.fn([['a', t.string], ['b', t.number]] as const, t.boolean),
 		false,
 	],
@@ -125,25 +125,25 @@ export default [
 	[
 		t.readonly(t.fn([['a', t.string], ['b', t.number]] as const, t.boolean)),
 		t.fn([['a', t.string], ['b', t.number]] as const, t.boolean),
-		true,
+		false,
 	],
 	[
-		t.recursion('T', (self) => t.fn([['a', t.string], ['b', self]] as const, t.boolean)),
+		helpers.v27,
 		t.fn([['a', t.string]] as const, t.boolean),
 		false,
 	],
 	[
-		t.recursion('T', (self) => t.fn([['a', t.string], ['b', self]] as const, t.boolean)),
+		helpers.v27,
 		t.fn([['a', t.string], ['b', t.number]] as const, t.boolean),
 		false,
 	],
 	[
-		t.recursion('T', (self) => t.fn([['a', t.string], ['b', self]] as const, t.boolean)),
+		helpers.v27,
 		t.fn([['a', t.string], ['b', t.fn([['a', t.string]] as const, t.boolean)]] as const, t.boolean),
 		true,
 	],
 	[
-		t.brand(t.number, (x): x is t.Branded<number, Brand> => true, 'Brand'),
+		t.brand(t.number, (x): x is t.Branded<number, helpers.Brand> => true, 'Brand'),
 		t.fn([['a', t.string], ['b', t.number]] as const, t.boolean),
 		false,
 	],

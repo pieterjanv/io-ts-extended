@@ -97,7 +97,6 @@ export function initFunction() {
 					return Ternary.False;
 				}
 				return (
-					(parameter[0] === target.parameters[index]?.[0] ? Ternary.True : Ternary.False) &
 					isExtendedBy(parameter[1], target.parameters[index]?.[1] ?? t.never) ||
 					isExtendedBy(target.parameters[index]?.[1] ?? t.never, parameter[1])
 				);
@@ -117,13 +116,6 @@ export function initFunction() {
 		t.UnionType,
 		FunctionType,
 		unionSourceDefaultHandler,
-		undefined,
-	);
-
-	extensionRegistry.register(
-		t.ReadonlyType,
-		FunctionType,
-		(source, target, isExtendedBy) => isExtendedBy(target, source.type),
 		undefined,
 	);
 

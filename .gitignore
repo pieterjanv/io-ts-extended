@@ -1,5 +1,6 @@
 /.env
 node_modules/
-/test/out/
+/test/extensionLogicResults.json
+/test/out/**/*
 *.tgz
 /dist/

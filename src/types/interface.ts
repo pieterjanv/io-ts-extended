@@ -30,6 +30,56 @@ export function initInterface() {
 	});
 
 	extensionRegistry.register<
+		typeof t.AnyDictionaryType,
+		typeof t.InterfaceType<any>
+	>(
+		t.AnyDictionaryType,
+		t.InterfaceType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => {
+			if (!Object.keys(target.props).length) {
+				return Ternary.True;
+			}
+			return Ternary.False;
+		},
+		(
+			source,
+			targetKey,
+			targetType,
+			isExtendedBy,
+			hasExtendingProp,
+		) => Ternary.False,
+	);
+
+	extensionRegistry.register<
+		typeof t.DictionaryType<t.Any, t.Any>,
+		typeof t.InterfaceType<any>
+	>(
+		t.DictionaryType,
+		t.InterfaceType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => {
+			if (!Object.keys(target.props).length) {
+				return Ternary.True;
+			}
+			return Ternary.False;
+		},
+		(
+			source,
+			targetKey,
+			targetType,
+			isExtendedBy,
+			hasExtendingProp,
+		) => Ternary.False,
+	);
+
+	extensionRegistry.register<
 		typeof t.InterfaceType<any>,
 		typeof t.InterfaceType<any>
 	>(

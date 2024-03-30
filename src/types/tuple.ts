@@ -3,6 +3,7 @@ import { extendProtype } from '../misc.js';
 import { unionSourceDefaultHandler } from './union.js';
 import { extensionRegistry } from '../extensionRegistry.js';
 import { Ternary, ternaryEvery } from '../ternary.js';
+import { intersectionSourceDefaultHandler } from './intersection.js';
 
 export function initTuple() {
 
@@ -38,25 +39,7 @@ export function initTuple() {
 	extensionRegistry.register(
 		t.IntersectionType,
 		t.TupleType,
-		(
-			source,
-			target,
-			isExtendedBy,
-		) => {
-			let result = target.types.map(() => Ternary.False);
-			for (const sourceType of source.types) {
-				if (sourceType instanceof t.TupleType) {
-					if (sourceType.types.length !== target.types.length) {
-						return Ternary.False;
-					}
-					for (const targetType of target.types) {
-						const index = target.types.indexOf(targetType);
-						result[index] |= isExtendedBy(targetType, sourceType.types[index]);
-					}
-				}
-			}
-			return ternaryEvery(result, (value) => value);
-		},
+		intersectionSourceDefaultHandler,
 		undefined,
 	);
 	

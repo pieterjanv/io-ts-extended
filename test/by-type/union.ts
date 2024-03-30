@@ -1,5 +1,5 @@
 import * as t from '#dist';
-import { Brand, myClss } from '../helpers.js';
+import * as helpers from '../helpers.js';;
 
 export default [
 	[
@@ -33,8 +33,8 @@ export default [
 		true,
 	],
 	[
-		myClss,
-		t.union([myClss, t.never]),
+		helpers.myClss,
+		t.union([helpers.myClss, t.never]),
 		true,
 	],
 	[
@@ -128,12 +128,12 @@ export default [
 		true,
 	],
 	[
-		t.recursion('T', (self) => t.type({ a: t.string, b: self })),
+		helpers.v1,
 		t.union([t.never, t.type({ a: t.string, b: t.type({ a: t.string }) })]),
 		true,
 	],
 	[
-		t.brand(t.number, (x): x is t.Branded<number, Brand> => true, 'Brand'),
+		t.brand(t.number, (x): x is t.Branded<number, helpers.Brand> => true, 'Brand'),
 		t.union([t.never, t.number]),
 		true,
 	],

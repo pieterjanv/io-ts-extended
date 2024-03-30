@@ -27,6 +27,26 @@ export function initPartial() {
 	});
 
 	extensionRegistry.register<
+		typeof t.AnyDictionaryType,
+		typeof t.PartialType<any>
+	>(
+		t.AnyDictionaryType,
+		t.PartialType,
+		() => Ternary.True,
+		() => Ternary.True,
+	);
+
+	extensionRegistry.register<
+		typeof t.DictionaryType<t.Any, t.Any>,
+		typeof t.PartialType<any>
+	>(
+		t.DictionaryType,
+		t.PartialType,
+		() => Ternary.True,
+		() => Ternary.True,
+	);
+
+	extensionRegistry.register<
 		typeof t.InterfaceType<any>,
 		typeof t.PartialType<any>
 	>(

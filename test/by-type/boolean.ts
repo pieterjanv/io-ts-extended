@@ -1,5 +1,5 @@
 import * as t from '#dist';
-import { Brand, myClss } from '../helpers.js';
+import * as helpers from '../helpers.js';;
 
 export default [
 	[
@@ -33,7 +33,7 @@ export default [
 		true,
 	],
 	[
-		myClss,
+		helpers.myClss,
 		t.boolean,
 		false,
 	],
@@ -103,12 +103,12 @@ export default [
 		true,
 	],
 	[
-		t.recursion('T', (self) => t.type({ a: t.string, b: self })),
+		helpers.v1,
 		t.boolean,
 		false,
 	],
 	[
-		t.brand(t.boolean, (x): x is t.Branded<boolean, Brand> => true, 'Brand'),
+		t.brand(t.boolean, (x): x is t.Branded<boolean, helpers.Brand> => true, 'Brand'),
 		t.boolean,
 		true,
 	],

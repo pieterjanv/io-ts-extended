@@ -1,7 +1,7 @@
 {
 	"type": "module",
 	"scripts": {
-		"test": "tsc --noEmit && vite-node index.ts"
+		"test": "if [ -e out ]; then rm -r out; fi && tsc --noEmit && vite-node index.ts"
 	},
 	"imports": {
 		"#dist": "../dist/index.js"

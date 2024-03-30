@@ -1,1 +1,2 @@
-import './extensionLogic.js';
+// import './extensionLogic.js';
+import './extensionLogic/index.js';

@@ -1,5 +1,5 @@
 import * as t from '#dist';
-import { Brand, myClss } from '../helpers.js';
+import * as helpers from '../helpers.js';;
 
 export default [
 	[
@@ -53,12 +53,12 @@ export default [
 		false,
 	],
 	[
-		myClss,
+		helpers.myClss,
 		t.intersection([t.type({ a: t.string }), t.type({ c: t.boolean })]),
 		true,
 	],
 	[
-		myClss,
+		helpers.myClss,
 		t.intersection([t.type({ a: t.string }), t.type({ d: t.boolean })]),
 		false,
 	],
@@ -143,12 +143,12 @@ export default [
 		true,
 	],
 	[
-		t.recursion('T', (self) => t.type({ a: t.string, b: self })),
+		helpers.v1,
 		t.intersection([t.type({ a: t.string }), t.type({ b: t.type({ a: t.string })})]),
 		true,
 	],
 	[
-		t.brand(t.number, (x): x is t.Branded<number, Brand> => true, 'Brand'),
+		t.brand(t.number, (x): x is t.Branded<number, helpers.Brand> => true, 'Brand'),
 		t.intersection([t.number, t.unknown]),
 		true,
 	],

@@ -1,5 +1,5 @@
 import * as t from '#dist';
-import { Brand, myClss } from '../helpers.js';
+import * as helpers from '../helpers.js';;
 
 export default [
 	[
@@ -10,7 +10,7 @@ export default [
 	[
 		new t.AnyDictionaryType,
 		t.partial({ a: t.string, b: t.number}),
-		false,
+		true,
 	],
 	[
 		t.any,
@@ -33,14 +33,14 @@ export default [
 		false,
 	],
 	[
-		myClss,
+		helpers.myClss,
 		t.partial({ a: t.string }),
 		true,
 	],
 	[
 		t.record(t.string, t.string),
 		t.partial({ a: t.string, b: t.number}),
-		false,
+		true,
 	],
 	[
 		t.exact(t.type({ a: t.string })),
@@ -58,7 +58,7 @@ export default [
 		false,
 	],
 	[
-		t.type({}),
+		t.type(helpers.emptyProps),
 		t.partial({ a: t.string, b: t.number}),
 		true,
 	],
@@ -83,7 +83,7 @@ export default [
 		true,
 	],
 	[
-		t.intersection([t.type({}), t.type({ b: t.number })]),
+		t.intersection([t.type(helpers.emptyProps), t.type({ b: t.number })]),
 		t.partial({ a: t.string, b: t.number}),
 		true,
 	],
@@ -98,7 +98,7 @@ export default [
 		true,
 	],
 	[
-		t.intersection([t.recursion('T', (self) => t.type({ a: t.string, b: self })), t.partial({ b: t.string })]),
+		t.intersection([helpers.v1, t.partial({ b: t.string })]),
 		t.partial({ a: t.string, b: t.string}),
 		true,
 	],
@@ -153,27 +153,27 @@ export default [
 		true,
 	],
 	[
-		t.recursion('T', (self) => t.type({ a: t.string, b: self })),
+		helpers.v1,
 		t.partial({ a: t.string, b: t.type({ a: t.string })}),
 		true,
 	],
 	[
-		t.recursion('T', (self) => t.type({ a: t.string, b: t.union([self, t.undefined]) })),
+		helpers.v28,
 		t.partial({ a: t.string, b: t.type({ a: t.string })}),
 		true,
 	],
 	[
-		t.recursion('T', (self) => t.type({ a: t.string, b: t.union([self, t.number]) })),
+		helpers.v29,
 		t.partial({ a: t.string, b: t.type({ a: t.string })}),
 		false,
 	],
 	[
-		t.recursion('T', (self) => t.type({ a: t.string, b: t.union([self, t.undefined]) })),
+		helpers.v28,
 		t.partial({ a: t.string }),
 		true,
 	],
 	[
-		t.brand(t.number, (x): x is t.Branded<number, Brand> => true, 'Brand'),
+		t.brand(t.number, (x): x is t.Branded<number, helpers.Brand> => true, 'Brand'),
 		t.partial({ a: t.string, b: t.number}),
 		false,
 	],

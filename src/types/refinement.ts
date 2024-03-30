@@ -3,12 +3,20 @@ import { extendProtype } from "../misc.js";
 import { intersectionSourceDefaultHandler } from './intersection.js';
 import { unionSourceDefaultHandler } from './union.js';
 import { extensionRegistry } from '../extensionRegistry.js';
+import { Ternary } from '../ternary.js';
 
 export function initRefinement() {
 
 	extendProtype(t.RefinementType, {
 		render() { return this.name; },
 	});
+
+	extensionRegistry.register(
+		t.AnyType,
+		t.RefinementType,
+		() => Ternary.True,
+		undefined,
+	)
 	
 	extensionRegistry.register(
 		t.RefinementType,

@@ -34,7 +34,10 @@ export function initKeyof() {
 			source,
 			target,
 			isExtendedBy,
-		) => target.is(source.value) ? Ternary.True : Ternary.False,
+		) => (
+			(typeof source.value === 'string' || typeof source.value === 'number') &&
+			Object.hasOwn(target.keys, source.value)
+		)? Ternary.True : Ternary.False,
 		undefined,
 	);
 

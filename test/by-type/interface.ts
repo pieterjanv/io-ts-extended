@@ -1,5 +1,5 @@
 import * as t from '#dist';
-import { Brand, myClss } from '../helpers.js';
+import * as helpers from '../helpers.js';;
 
 export default [
 	[
@@ -33,14 +33,14 @@ export default [
 		false,
 	],
 	[
-		myClss,
+		helpers.myClss,
 		t.type({ a: t.string }),
 		true,
 	],
 	[
 		t.record(t.string, t.string),
-		(t.type({})),
-		false,
+		(t.type(helpers.emptyProps)),
+		true,
 	],
 	[
 		t.exact(t.type({ a: t.string })),
@@ -89,12 +89,12 @@ export default [
 	],
 	[
 		t.intersection([t.type({ a: t.string }), t.type({ b: t.number })]),
-		t.type({}),
+		t.type(helpers.emptyProps),
 		true,
 	],
 	[
 		t.intersection([t.number, t.literal(1)]),
-		t.type({}),
+		t.type(helpers.emptyProps),
 		false,
 	],
 	[
@@ -128,8 +128,8 @@ export default [
 		false,
 	],
 	[
-		t.partial({}),
-		(t.type({})),
+		t.partial(helpers.emptyProps),
+		(t.type(helpers.emptyProps)),
 		true,
 	],
 	[
@@ -143,12 +143,12 @@ export default [
 		true,
 	],
 	[
-		t.recursion('T', (self) => t.type({ a: t.string, b: self })),
+		helpers.v1,
 		(t.type({ a: t.string })),
 		true,
 	],
 	[
-		t.brand(t.type({a: t.string}), (x): x is t.Branded<{a: string}, Brand> => true, 'Brand'),
+		t.brand(t.type({a: t.string}), (x): x is t.Branded<{a: string}, helpers.Brand> => true, 'Brand'),
 		(t.type({ a: t.string })),
 		true,
 	],

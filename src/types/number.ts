@@ -42,9 +42,10 @@ export function initNumber() {
 			source,
 			target,
 			isExtendedBy,
-		) => Object.keys(source.keys).every(key => target.is(key))
-			? Ternary.True
-			: Ternary.False,
+		) => (
+			Object.keys(source.keys).every(key => !Number.isNaN(Number(key)) &&
+			Number.isInteger(parseFloat(key)))
+		) ? Ternary.True : Ternary.False,
 		undefined,
 	);
 

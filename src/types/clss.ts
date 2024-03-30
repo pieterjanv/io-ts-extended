@@ -312,6 +312,17 @@ export function initClss() {
 	);
 
 	extensionRegistry.register(
+		t.ExactType,
+		ClssType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target, source.type),
+		undefined,
+	);
+
+	extensionRegistry.register(
 		t.RefinementType,
 		ClssType,
 		(
@@ -330,6 +341,17 @@ export function initClss() {
 			target,
 			isExtendedBy,
 		) => isExtendedBy(target, source.type),
+		undefined,
+	);
+
+	extensionRegistry.register(
+		t.InterfaceType,
+		ClssType,
+		(
+			source,
+			target,
+			isExtendedBy,
+		) => isExtendedBy(target.type, source),
 		undefined,
 	);
 
@@ -354,10 +376,7 @@ export function initClss() {
 			source,
 			target,
 			isExtendedBy,
-		) => (
-			isExtendedBy(target.type, source.type) &
-			isExtendedBy(target.staticType, source.staticType)
-		),
+		) => isExtendedBy(target.type, source.type),
 		undefined,
 	);
 }

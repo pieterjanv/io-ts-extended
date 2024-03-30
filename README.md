@@ -8,6 +8,7 @@
   - [Extra types](#extra-types)
   - [Other utilities](#other-utilities)
 - [Notes](#notes)
+  - [Tests are driven by TypeScript itself](#tests-are-driven-by-typescript-itself)
   - [`strictFunctionTypes` set to `false`](#strictfunctiontypes-set-to-false)
   - [Every type should be uniquely named](#every-type-should-be-uniquely-named)
   - [Use a build tool](#use-a-build-tool)
@@ -23,6 +24,9 @@ functionality to test if one type extends another, like the `extends` keyword in
 TypeScript, alongside a few types and other utilities.
 
 Additionally, you can add extension testing logic for your own types.
+
+The [run-time logic is tested against TypeScript's compile-time logic](#tests-are-driven-by-typescript-itself) for all
+test cases.
 
 I hope to mature this package, so any feedback is greatly appreciated. It's
 currently in beta.
@@ -342,6 +346,23 @@ These are the ternary counterparts of `Array.prototype.some()` and
 ## Notes
 
 
+### Tests are driven by TypeScript itself
+
+TypeScipt is used as the ground truth for the extension testing logic; i.e.
+the run-time result of this package is compared to the compile-time result
+of typescript for all tests.
+
+This is achieved by leveraging the TypeScript compiler API; after extracting the
+source and target types for all test cases, a source file is created that
+contains TypeScript extension test statements for each pair of types.
+TypeScript's result is then looked up and compared to the outcome of the
+run-time logic.
+
+In addition, test cases contain an expectation of the outcome. It does not
+influence the result, but it's helpful for comparing TypeScript's result against
+your own expectations.
+
+
 ### `strictFunctionTypes` set to `false`
 
 The package was built having `compilerOptions.strictFunctionTypes` set to
@@ -362,3 +383,78 @@ same name, the extension testing logic may give an incorrect result.
 This package is distributed as a typed CommonJs module, which should be no
 problem when using TypeScript. For use in a browser, use a build tool like vite
 to transpile and bundle.
+
+
+### Some types to watch out for
+
+A record extends a partial whose properties are more specific. I have no clue
+what the logic behind this is.
+
+```typescript
+type source = Record<string, unknown>;
+type target = Partial<{ a: string, b: number }>;
+const test: source extends target ? true : false = true;
+```
+
+Unlike object types, for tuple types the intersection of two tuples is not
+the tuple of the intersection of the elements.
+
+```typescript
+type source = [unknown, number];
+type target = [string, unknown];
+const test: source extends target ? true : false = false;
+```
+
+Static properties are not checked when comparing classes.
+
+```typescript
+class A {
+	static a: string = 'foo';
+}
+
+class B extends A {
+	static b: number = 42;
+}
+
+const test: B extends A ? true : false = true;
+```
+
+In TypeScript, numeric keys are not assignable to numeric string keys, yet
+JavaScript never returns a key as a number. It is therefore not possible to
+require strictly numeric or non-numeric keys.
+
+```typescript
+type source = 1;
+type target = keyof { '1': unknown };
+const test: source extends target ? true : false = false;
+```
+
+Apparently `any` may or may not extend `Readonly<any>`.
+
+```typescript
+type source = any;
+type target = Readonly<any>;
+const test: source extends target ? true : false = true;
+const test: source extends target ? true : false = false;
+```
+
+While all other types (except `any`) extend their readonly counterpart,
+for `unknown` this is not the case.
+
+```typescript
+type source = unknown;
+type target = Readonly<unknown>;
+const test: source extends target ? true : false = false;
+```
+
+Recursive function parameters (like you will ever use them) are also curious:
+
+```typescript
+type source1 = (a: string) => boolean;
+type source2 = (a: string, b: (a: string) => boolean) => boolean;
+type target = (a: string, b: target) => boolean;
+
+const test1: source1 extends target ? true : false = true;
+const test2: source2 extends target ? true : false = false;
+const test3: target extends target ? true : false = true;
+```

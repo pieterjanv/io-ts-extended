@@ -1,5 +1,5 @@
 import * as t from '#dist';
-import { Brand, myClss } from '../helpers.js';
+import * as helpers from '../helpers.js';;
 
 export default [
 	[
@@ -33,33 +33,33 @@ export default [
 		false,
 	],
 	[
-		myClss,
-		myClss,
+		helpers.myClss,
+		helpers.myClss,
 		true,
 	],
 	[
-		myClss, t.clss('U', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean), c: t.boolean }),
-		t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean), c: t.boolean }), class extends myClss.ctor {}),
+		helpers.myClss, t.clss('U', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean), c: t.boolean }),
+		t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean), c: t.boolean }), class extends helpers.myClss.ctor {}),
 		true,
 	],
 	[
-		t.clss('V', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean), c: t.boolean }), class extends myClss.ctor {}),
-		myClss,
-		false,
+		t.clss('V', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean), c: t.boolean }), class extends helpers.myClss.ctor {}),
+		helpers.myClss,
+		true,
 	],
 	[
-		t.clss('W', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean), c: t.boolean }), t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), class extends myClss.ctor {}),
-		myClss,
+		t.clss('W', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean), c: t.boolean }), t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), class extends helpers.myClss.ctor {}),
+		helpers.myClss,
 		false,
 	],
 	[
 		t.clss('X', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean), c: t.boolean }), t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean), c: t.boolean }), class extends t.Implementation { static a: string = 'foo'; static b(a: string): boolean { return true; }; static c: false; a: string = 'foo'; b(a: string): boolean { return true; }; c: boolean = false }),
-		myClss,
+		helpers.myClss,
 		true,
 	],
 	[
-		t.extendClss('Y', myClss, t.type({ d: t.string }), t.type({ d: t.string }), class extends myClss.ctor { static d: string = 'd'; d: string = 'd' }),
-		myClss,
+		t.extendClss('Y', helpers.myClss, t.type({ d: t.string }), t.type({ d: t.string }), class extends helpers.myClss.ctor { static d: string = 'd'; d: string = 'd' }),
+		helpers.myClss,
 		true,
 	],
 	[
@@ -70,7 +70,7 @@ export default [
 	[
 		t.exact(t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) })),
 		t.clss('T', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean)}), t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), class extends t.Implementation { static a: string = 'foo'; static b(a: string): boolean { return true }; a: string = 'foo'; b(a: string): boolean { return true; }}),
-		false,
+		true,
 	],
 	[
 		t.fn([['a', t.string]] as const, t.boolean),
@@ -80,7 +80,7 @@ export default [
 	[
 		t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }),
 		t.clss('T', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean)}), t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), class extends t.Implementation { static a: string = 'foo'; static b(a: string): boolean { return true }; a: string = 'foo'; b(a: string): boolean { return true; }}),
-		false,
+		true,
 	],
 	[
 		t.type({ a: t.string, b: t.fn([['a', t.number]] as const, t.boolean) }),
@@ -90,11 +90,11 @@ export default [
 	[
 		t.intersection([t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), t.type({ c: t.number })]),
 		t.clss('T', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean)}), t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), class extends t.Implementation { static a: string = 'foo'; static b(a: string): boolean { return true }; a: string = 'foo'; b(a: string): boolean { return true; }}),
-		false,
+		true,
 	],
 	[
-		t.intersection([myClss, t.type({ a: t.literal('s') })]),
-		myClss,
+		t.intersection([helpers.myClss, t.type({ a: t.literal('s') })]),
+		helpers.myClss,
 		true,
 	],
 	[
@@ -135,31 +135,31 @@ export default [
 	[
 		t.readonly(t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) })),
 		t.clss('T', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean)}), t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), class extends t.Implementation { static a: string = 'foo'; static b(a: string): boolean { return true }; a: string = 'foo'; b(a: string): boolean { return true; }}),
-		false,
-	],
-	[
-		t.readonly(myClss),
-		myClss,
 		true,
 	],
 	[
-		t.recursion('T', (self) => t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean), c: self })),
-		t.clss('T', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean)}), t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), class extends t.Implementation { static a: string = 'foo'; static b(a: string): boolean { return true }; a: string = 'foo'; b(a: string): boolean { return true; }}),
-		false,
-	],
-	[
-		t.recursion('T', (self) => t.extendClss('T', myClss, t.type({}), t.type({ d: self }), class extends myClss.ctor { d: this = this })),
-		myClss,
+		t.readonly(helpers.myClss),
+		helpers.myClss,
 		true,
 	],
 	[
-		t.brand(t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), (x): x is t.Branded<{ a: string, b: (a: string) => boolean }, Brand> => true, 'Brand'),
+		helpers.v25,
 		t.clss('T', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean)}), t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), class extends t.Implementation { static a: string = 'foo'; static b(a: string): boolean { return true }; a: string = 'foo'; b(a: string): boolean { return true; }}),
-		false,
+		true,
 	],
 	[
-		t.brand(myClss, (x): x is t.Branded<t.TypeOf<typeof myClss>, Brand> => true, 'Brand'),
-		myClss,
+		helpers.v26,
+		helpers.myClss,
+		true,
+	],
+	[
+		t.brand(t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), (x): x is t.Branded<{ a: string, b: (a: string) => boolean }, helpers.Brand> => true, 'Brand'),
+		t.clss('T', t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean)}), t.type({ a: t.string, b: t.fn([['a', t.string]] as const, t.boolean) }), class extends t.Implementation { static a: string = 'foo'; static b(a: string): boolean { return true }; a: string = 'foo'; b(a: string): boolean { return true; }}),
+		true,
+	],
+	[
+		t.brand(helpers.myClss, (x): x is t.Branded<t.TypeOf<typeof helpers.myClss>, helpers.Brand> => true, 'Brand'),
+		helpers.myClss,
 		true,
 	],
 	[
@@ -178,8 +178,8 @@ export default [
 		false,
 	],
 	[
-		t.union([myClss, t.extendClss('Z', myClss, t.type({}), t.type({ a: t.literal('s') }), class extends myClss.ctor { a: 's' = 's' })]),
-		myClss,
+		t.union([helpers.myClss, t.extendClss('Z', helpers.myClss, t.type(helpers.emptyProps), t.type({ a: t.literal('s') }), class extends helpers.myClss.ctor { a: 's' = 's' })]),
+		helpers.myClss,
 		true,
 	],
 	[
@@ -193,13 +193,13 @@ export default [
 		false,
 	],
 	[
-		t.nullable(myClss),
-		myClss,
+		t.nullable(helpers.myClss),
+		helpers.myClss,
 		false,
 	],
 	[
-		t.promise(myClss),
-		myClss,
+		t.promise(helpers.myClss),
+		helpers.myClss,
 		false,
 	],
 ] as readonly [t.Type<unknown>, t.Type<unknown>, boolean][];
