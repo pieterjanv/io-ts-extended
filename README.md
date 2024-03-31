@@ -16,9 +16,6 @@
 
 ## Description
 
-*To stimulate feedback I created a
-[tiny survey](https://forms.gle/6r1HjUXS25aP641D9).*
-
 This package extends the [`io-ts`](https://github.com/gcanti/io-ts) package with
 functionality to test if one type extends another, like the `extends` keyword in
 TypeScript, alongside a few types and other utilities.
