@@ -6,7 +6,7 @@ TypeScript, alongside a few types and other utilities.
 
 Additionally, you can add extension testing logic for your own types.
 
-The [run-time logic is tested against TypeScript's compile-time logic](#tests-are-driven-by-typescript-itself)
+The run-time logic is tested against TypeScript's compile-time logic
 for all test cases.
 
 - [Installation](#installation)
@@ -341,7 +341,7 @@ These are the ternary counterparts of `Array.prototype.some()` and
 
 TypeScipt is used as the ground truth for the extension testing logic; i.e.
 the run-time result of this package is compared to the compile-time result
-of typescript for all tests.
+of TypeScript for all tests.
 
 This is achieved by leveraging the TypeScript compiler API; after extracting the
 source and target types for all test cases, a source file is created that
