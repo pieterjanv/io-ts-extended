@@ -1,6 +1,14 @@
 # io-ts-extended
 
-- [Description](#description)
+This package extends the [`io-ts`](https://github.com/gcanti/io-ts) package with
+functionality to test if one type extends another, like the `extends` keyword in
+TypeScript, alongside a few types and other utilities.
+
+Additionally, you can add extension testing logic for your own types.
+
+The [run-time logic is tested against TypeScript's compile-time logic](#tests-are-driven-by-typescript-itself)
+for all test cases.
+
 - [Installation](#installation)
 - [Usage](#usage)
   - [Testing two types](#testing-two-types)
@@ -12,21 +20,6 @@
   - [`strictFunctionTypes` set to `false`](#strictfunctiontypes-set-to-false)
   - [Every type should be uniquely named](#every-type-should-be-uniquely-named)
   - [Use a build tool](#use-a-build-tool)
-
-
-## Description
-
-This package extends the [`io-ts`](https://github.com/gcanti/io-ts) package with
-functionality to test if one type extends another, like the `extends` keyword in
-TypeScript, alongside a few types and other utilities.
-
-Additionally, you can add extension testing logic for your own types.
-
-The [run-time logic is tested against TypeScript's compile-time logic](#tests-are-driven-by-typescript-itself) for all
-test cases.
-
-I hope to mature this package, so any feedback is greatly appreciated. It's
-currently in beta.
 
 
 ## Installation
