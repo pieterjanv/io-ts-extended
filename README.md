@@ -247,8 +247,9 @@ with their some quirks.
 
 #### `t.FunctionType`
 
-`t.FunctionType` can be used to specify functions with a specific signature, allowing one to define parameter names and types, as well as the return type. As
-such it carries more information than `io-ts`'s' native version.
+`t.FunctionType` can be used to specify functions with a specific signature,
+allowing one to define parameter names and types, as well as the return type. As
+such it carries more information than `io-ts`'s native version.
 
 It doesn't make sense to me to serialize functions. Therefore, using the
 default instantiator `t.fn()`, encoding returns a special
