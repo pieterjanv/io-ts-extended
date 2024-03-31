@@ -20,6 +20,7 @@ for all test cases.
   - [`strictFunctionTypes` set to `false`](#strictfunctiontypes-set-to-false)
   - [Every type should be uniquely named](#every-type-should-be-uniquely-named)
   - [Use a build tool](#use-a-build-tool)
+  - [Some types to watch out for](#some-types-to-watch-out-for)
 
 
 ## Installation
@@ -378,7 +379,7 @@ to transpile and bundle.
 
 ### Some types to watch out for
 
-A record extends a partial whose properties are more specific. I have no clue
+A record extends a partial whose properties are incompatible. I have no clue
 what the logic behind this is.
 
 ```typescript
@@ -387,8 +388,8 @@ type target = Partial<{ a: string, b: number }>;
 const test: source extends target ? true : false = true;
 ```
 
-Unlike object types, for tuple types the intersection of two tuples is not
-the tuple of the intersection of the elements.
+Unlike for object types, for tuple types the intersection of two tuples is not
+the tuple of the intersections of each tuple element type.
 
 ```typescript
 type source = [unknown, number];
