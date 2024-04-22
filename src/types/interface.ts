@@ -148,7 +148,7 @@ export function initInterface() {
 			targetType,
 			isExtendedBy,
 			hasExtendingProp,
-		) => hasExtendingProp(source.type, targetKey, targetType),
+		) => hasExtendingProp(source.type),
 	);
 
 	extensionRegistry.register(
@@ -185,21 +185,24 @@ export function initInterface() {
 					return Ternary.Maybe;
 				}
 				expanded.push(source);
-				const SourceMemberCtor = Object.getPrototypeOf(source).constructor as TypeCtor;
-				const handler = extensionRegistry.getInterfaceIntersectionHandler(SourceMemberCtor);
+				const SourceCtor = Object.getPrototypeOf(source).constructor as TypeCtor;
+				const handler = extensionRegistry.getInterfaceIntersectionHandler(SourceCtor);
 				let result: Ternary = Ternary.False;
 				handler && (result = handler(
 					source,
 					targetKey,
 					targetType,
 					isExtendedBy,
-					(source, targetKey, targetType) => hasExtendingProp(
-						source,
+					(s) => hasExtendingProp(
+						s,
 						targetKey,
 						targetType,
 						expanded,
 					),
 				));
+
+				expanded.pop();
+
 				return result;
 			}
 		},
@@ -211,7 +214,7 @@ export function initInterface() {
 			hasExtendingProp,
 		) => ternarySome(
 			source.types as t.Type<unknown>[],
-			(source) => hasExtendingProp(source, targetKey, targetType),
+			(s) => hasExtendingProp(s),
 		),
 	);
 
@@ -227,7 +230,7 @@ export function initInterface() {
 			hasExtendingProp,
 		) => ternaryEvery(
 			source.types as t.Type<unknown>[],
-			(sourceType) => hasExtendingProp(sourceType, targetKey, targetType)
+			(sourceType) => hasExtendingProp(sourceType)
 		),
 	);
 
@@ -245,7 +248,7 @@ export function initInterface() {
 			targetType,
 			isExtendedBy,
 			hasExtendingProp,
-		) => hasExtendingProp(source.type, targetKey, targetType),
+		) => hasExtendingProp(source.type),
 	);
 
 	extensionRegistry.register(
@@ -262,7 +265,7 @@ export function initInterface() {
 			targetType,
 			isExtendedBy,
 			hasExtendingProp,
-		) => hasExtendingProp(source.type, targetKey, targetType),
+		) => hasExtendingProp(source.type),
 	);
 
 	extensionRegistry.register(
@@ -279,6 +282,6 @@ export function initInterface() {
 			targetType,
 			isExtendedBy,
 			hasExtendingProp,
-		) => hasExtendingProp(source.type, targetKey, targetType),
+		) => hasExtendingProp(source.type),
 	);
 }

@@ -43,6 +43,11 @@ export default [
 		true,
 	],
 	[
+		t.record(t.string, t.string),
+		t.type({ a: t.number }),
+		false,
+	],
+	[
 		t.exact(t.type({ a: t.string })),
 		t.type({ a: t.string }),
 		true,
@@ -146,6 +151,11 @@ export default [
 		helpers.v1,
 		(t.type({ a: t.string })),
 		true,
+	],
+	[
+		helpers.v1,
+		(t.type({ a: t.number })),
+		false,
 	],
 	[
 		t.brand(t.type({a: t.string}), (x): x is t.Branded<{a: string}, helpers.Brand> => true, 'Brand'),

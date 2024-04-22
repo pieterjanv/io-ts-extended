@@ -25,14 +25,10 @@ type SetPropsSourceResult = (
 
 export type HasExtendingProp = (
 	source: t.Type<unknown>,
-	targetKey: string | number,
-	targetType: t.Type<unknown>,
 ) => Ternary;
 
 export type HasPartiallyExtendingProp = (
 	source: t.Type<unknown>,
-	targetKey: string | number,
-	targetType: t.Type<unknown>,
 ) => Ternary | undefined;
 
 type DictionaryIntersectionHandler<S extends TypeCtor, T extends TypeCtor> = (

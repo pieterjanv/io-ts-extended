@@ -234,7 +234,7 @@ export function initClss() {
 			targetType,
 			isExtendedBy,
 			hasExtendingProp,
-		) => hasExtendingProp(source.type, targetKey, targetType),
+		) => hasExtendingProp(source.type),
 	);
 
 	extensionRegistry.register<
@@ -254,7 +254,7 @@ export function initClss() {
 			targetType,
 			isExtendedBy,
 			hasPartiallyExtendingProp,
-		) => hasPartiallyExtendingProp(source.type, targetKey, targetType),
+		) => hasPartiallyExtendingProp(source.type),
 	);
 
 	extensionRegistry.register(

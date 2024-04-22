@@ -108,13 +108,16 @@ export function initPartial() {
 					targetKey,
 					targetType,
 					isExtendedBy,
-					(source, targetKey, targetType) => hasPartiallyExtendingProp(
+					(source) => hasPartiallyExtendingProp(
 						source,
 						targetKey,
 						targetType,
 						expanded,
 					),
 				));
+
+				expanded.pop();
+
 				return result;
 			}
 		},
@@ -127,7 +130,7 @@ export function initPartial() {
 		) => {
 			let result: Ternary | undefined = undefined;
 			for (const type of source.types) {
-				const r = hasPartiallyExtendingProp(type, targetKey, targetType);
+				const r = hasPartiallyExtendingProp(type);
 				switch(r) {
 					case Ternary.True:
 						return Ternary.True;
@@ -155,7 +158,7 @@ export function initPartial() {
 		) => {
 			let result: Ternary | undefined = undefined;
 			for (const type of source.types) {
-				const r = hasPartiallyExtendingProp(type, targetKey, targetType);
+				const r = hasPartiallyExtendingProp(type);
 				switch(r) {
 					case Ternary.False:
 						return Ternary.False;
@@ -229,7 +232,7 @@ export function initPartial() {
 		isExtendedBy: IsExtendedBy,
 		hasPartiallyExtendingProp: HasPartiallyExtendingProp,
 	) {
-		return hasPartiallyExtendingProp(source.type, targetKey, targetType);
+		return hasPartiallyExtendingProp(source.type);
 	}
 
 	function interfaceOrPartialSourceHandler<
